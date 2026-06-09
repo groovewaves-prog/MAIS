@@ -1,0 +1,648 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2017-08-13 02:46+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller/GwEventsController.php:361
+msgid "情報に更新がありません。"
+msgstr ""
+
+#: Controller/GwEventsController.php:366
+msgid "The gw event has been saved."
+msgstr ""
+
+#: Controller/GwEventsController.php:368
+msgid "The gw event could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/GwEventsController.php:412
+#: Controller/GwRulesController.php:394
+msgid "前の画面に戻り、一括更新するレコードを選択してください。"
+msgstr ""
+
+#: Controller/GwEventsController.php:448
+msgid "一括更新する情報を1項目以上入力してください。"
+msgstr ""
+
+#: Controller/GwEventsController.php:456
+msgid "一括更新しました。"
+msgstr ""
+
+#: Controller/GwEventsController.php:482
+msgid "承認:"
+msgstr ""
+
+#: Controller/GwEventsController.php:491
+msgid "補記情報:"
+msgstr ""
+
+#: Controller/GwRulesController.php:29
+msgid "Primaryサーバでしか編集できません。"
+msgstr ""
+
+#: Controller/GwRulesController.php:345
+msgid "The gw rule has been saved."
+msgstr ""
+
+#: Controller/GwRulesController.php:348
+msgid "The gw rule could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/GwRulesController.php:543
+msgid "The gw rule has been added."
+msgstr ""
+
+#: Controller/GwRulesController.php:547
+msgid "The gw rule could not be added. Please, try again."
+msgstr ""
+
+#: Controller/UsersController.php:28
+msgid "すでに認証されています。別IDでログインしたい場合は一度ログアウトするか別ブラウザで開いてください。"
+msgstr ""
+
+#: Controller/UsersController.php:43
+msgid "ユーザ名を入力してください。"
+msgstr ""
+
+#: Controller/UsersController.php:47
+msgid "パスワードを入力してください。"
+msgstr ""
+
+#: Controller/UsersController.php:55
+msgid "認証に失敗しました。"
+msgstr ""
+
+#: Controller/UsersController.php:58
+msgid "認証に成功しました。"
+msgstr ""
+
+#: Controller/UsersController.php:96
+msgid "ログアウトしました。"
+msgstr ""
+
+#: Controller/Component/ZbxAuthComponent.php:43;53;71
+msgid "ログインしてください。"
+msgstr ""
+
+#: Controller/Component/ZbxAuthComponent.php:106
+msgid "表示する権限がありません。"
+msgstr ""
+
+#: Template/GwEvents/bulk_update.ctp:6
+#: Template/GwEvents/edit.ctp:23
+#: Template/GwEvents/index.ctp:6
+#: Template/GwRules/add.ctp:5
+#: Template/GwRules/bulk_update.ctp:5
+#: Template/GwRules/edit.ctp:5
+#: Template/GwRules/index.ctp:6
+#: Template/MainMenu/index.ctp:6
+msgid "Main Menu"
+msgstr ""
+
+#: Template/GwEvents/bulk_update.ctp:7
+#: Template/GwEvents/edit.ctp:24
+msgid "List Gw Events"
+msgstr ""
+
+#: Template/GwEvents/bulk_update.ctp:8
+#: Template/GwRules/bulk_update.ctp:7
+msgid "一括更新画面"
+msgstr ""
+
+#: Template/GwEvents/bulk_update.ctp:26
+#: Template/GwEvents/edit.ctp:133
+#: Template/GwEvents/index.ctp:124
+msgid "Kisys Status"
+msgstr ""
+
+#: Template/GwEvents/bulk_update.ctp:79;87
+#: Template/GwEvents/edit.ctp:94
+msgid "Approve Edit"
+msgstr ""
+
+#: Template/GwEvents/bulk_update.ctp:80
+#: Template/GwEvents/edit.ctp:83
+msgid "Op Comment"
+msgstr ""
+
+#: Template/GwEvents/bulk_update.ctp:94
+#: Template/GwEvents/edit.ctp:101
+#: Template/GwRules/bulk_update.ctp:62
+msgid "変更しない"
+msgstr ""
+
+#: Template/GwEvents/bulk_update.ctp:95
+#: Template/GwEvents/edit.ctp:102
+msgid "承認する"
+msgstr ""
+
+#: Template/GwEvents/bulk_update.ctp:96
+#: Template/GwEvents/edit.ctp:103
+msgid "承認解除"
+msgstr ""
+
+#: Template/GwEvents/bulk_update.ctp:110
+msgid "空白で更新しても補記情報を削除することはできません。"
+msgstr ""
+
+#: Template/GwEvents/bulk_update.ctp:118
+#: Template/GwRules/bulk_update.ctp:80
+msgid "BulkUpdate"
+msgstr ""
+
+#: Template/GwEvents/bulk_update.ctp:149
+msgid "承認："
+msgstr ""
+
+#: Template/GwEvents/bulk_update.ctp:154
+msgid "補記情報："
+msgstr ""
+
+#: Template/GwEvents/bulk_update.ctp:158
+msgid "更新情報がありません。"
+msgstr ""
+
+#: Template/GwEvents/bulk_update.ctp:161
+msgid "下記へ一括更新を実行してもよろしいですか？"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:25;28
+msgid "イベント詳細"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:28;77
+msgid "イベントID："
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:40
+msgid "Alarm Status"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:41
+msgid "Gw Eventid"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:42
+msgid "Alarm Time"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:43
+msgid "Detected Host"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:44
+msgid "Detected Time"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:54
+#: Template/GwRules/bulk_update.ctp:51
+msgid "Customer Name"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:55
+#: Template/GwRules/bulk_update.ctp:52
+msgid "Hostname"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:56
+msgid "Ci Name"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:57
+msgid "Device Id"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:66
+msgid "Summary"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:77
+msgid "Edit Gw Event"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:80
+msgid "Checked Time"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:81
+msgid "Checked User"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:82;134
+msgid "Update Time"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:118
+#: Template/GwRules/add.ctp:40
+msgid "Submit"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:127
+msgid "KISYS 連携"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:129
+msgid "Event Status"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:130
+msgid "Gw Incident Id"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:131
+msgid "Incident Status"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:132
+msgid "Kisys Incidentid"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:185
+msgid "変更されていません"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:188
+msgid "更新してもよろしいですか？"
+msgstr ""
+
+#: Template/GwEvents/index.ctp:7
+#: Template/MainMenu/index.ctp:7
+msgid "Gw Events"
+msgstr ""
+
+#: Template/GwEvents/index.ctp:17
+msgid "[アラーム検索] ▲閉じる"
+msgstr ""
+
+#: Template/GwEvents/index.ctp:20
+msgid "パトライトストップ"
+msgstr ""
+
+#: Template/GwEvents/index.ctp:25
+msgid "アラーム検索"
+msgstr ""
+
+#: Template/GwEvents/index.ctp:28
+msgid "alarm_time_from"
+msgstr ""
+
+#: Template/GwEvents/index.ctp:28
+msgid "alarm_time_to"
+msgstr ""
+
+#: Template/GwEvents/index.ctp:44
+#: Template/GwRules/index.ctp:40
+msgid "列の 表示 / 非表示"
+msgstr ""
+
+#: Template/GwEvents/index.ctp:125
+#: Template/GwRules/index.ctp:122
+#: View/Helper/InputSetHelper.php:249
+msgid "Actions"
+msgstr ""
+
+#: Template/GwEvents/index.ctp:170
+msgid "承認済み"
+msgstr ""
+
+#: Template/GwEvents/index.ctp:173
+msgid "Op_Comment Approve Edit"
+msgstr ""
+
+#: Template/GwEvents/index.ctp:182
+#: Template/GwRules/index.ctp:184
+msgid "To BulkUpdate"
+msgstr ""
+
+#: Template/GwEvents/index.ctp:238
+msgid "パトライトを止めますか？"
+msgstr ""
+
+#: Template/GwEvents/index.ctp:249
+msgid "停止失敗:スクリプトファイルが存在しない、または実行権限が無い可能性があります。"
+msgstr ""
+
+#: Template/GwEvents/index.ctp:253
+msgid "停止失敗:ページが存在しない可能性があります。"
+msgstr ""
+
+#: Template/GwRules/add.ctp:6
+#: Template/GwRules/bulk_update.ctp:6
+#: Template/GwRules/edit.ctp:6
+#: Template/GwRules/index.ctp:7
+#: Template/MainMenu/index.ctp:10
+msgid "Gw Rules"
+msgstr ""
+
+#: Template/GwRules/add.ctp:7;12
+msgid "Add Gw Rule"
+msgstr ""
+
+#: Template/GwRules/add.ctp:18;21;27;31;35
+#: Template/GwRules/edit.ctp:25;29;36;40;44
+msgid "[Select]"
+msgstr ""
+
+#: Template/GwRules/add.ctp:54
+msgid "新規ルールを登録してもよろしいですか？"
+msgstr ""
+
+#: Template/GwRules/bulk_update.ctp:31
+#: Template/GwRules/index.ctp:138
+msgid "Yes"
+msgstr ""
+
+#: Template/GwRules/bulk_update.ctp:31
+#: Template/GwRules/index.ctp:138
+msgid "No"
+msgstr ""
+
+#: Template/GwRules/bulk_update.ctp:47
+msgid "Rule Status"
+msgstr ""
+
+#: Template/GwRules/bulk_update.ctp:48
+msgid "Rule Set"
+msgstr ""
+
+#: Template/GwRules/bulk_update.ctp:49
+msgid "Start Time"
+msgstr ""
+
+#: Template/GwRules/bulk_update.ctp:50
+msgid "End Time"
+msgstr ""
+
+#: Template/GwRules/bulk_update.ctp:53
+msgid "ci_name"
+msgstr ""
+
+#: Template/GwRules/bulk_update.ctp:54
+msgid "action_no"
+msgstr ""
+
+#: Template/GwRules/bulk_update.ctp:60
+msgid "有効"
+msgstr ""
+
+#: Template/GwRules/bulk_update.ctp:61
+msgid "無効"
+msgstr ""
+
+#: Template/GwRules/bulk_update.ctp:99
+#: Template/GwRules/edit.ctp:86
+msgid "ルールステータス："
+msgstr ""
+
+#: Template/GwRules/bulk_update.ctp:101
+msgid "ルールセット："
+msgstr ""
+
+#: Template/GwRules/bulk_update.ctp:102
+msgid "適用開始日時："
+msgstr ""
+
+#: Template/GwRules/bulk_update.ctp:103
+msgid "終了日時："
+msgstr ""
+
+#: Template/GwRules/bulk_update.ctp:104
+msgid "顧客名："
+msgstr ""
+
+#: Template/GwRules/bulk_update.ctp:105
+msgid "ホスト名："
+msgstr ""
+
+#: Template/GwRules/bulk_update.ctp:106
+msgid "CI名："
+msgstr ""
+
+#: Template/GwRules/bulk_update.ctp:107
+msgid "アクションNo："
+msgstr ""
+
+#: Template/GwRules/bulk_update.ctp:111
+msgid "下記情報の一括更新を実行してもよろしいですか？"
+msgstr ""
+
+#: Template/GwRules/edit.ctp:7;11
+msgid "Edit Gw Rule"
+msgstr ""
+
+#: Template/GwRules/edit.ctp:51
+msgid "saveas"
+msgstr ""
+
+#: Template/GwRules/edit.ctp:87
+msgid "ルールセット    ："
+msgstr ""
+
+#: Template/GwRules/edit.ctp:88
+msgid "適用開始日時    ："
+msgstr ""
+
+#: Template/GwRules/edit.ctp:89
+msgid "終了日時       ："
+msgstr ""
+
+#: Template/GwRules/edit.ctp:90
+msgid "顧客名         ："
+msgstr ""
+
+#: Template/GwRules/edit.ctp:91
+msgid "ホスト名        ："
+msgstr ""
+
+#: Template/GwRules/edit.ctp:92
+msgid "CI名           ："
+msgstr ""
+
+#: Template/GwRules/edit.ctp:93
+msgid "アクションNo    ："
+msgstr ""
+
+#: Template/GwRules/edit.ctp:99
+msgid "下記情報の更新を実行してもよろしいですか？"
+msgstr ""
+
+#: Template/GwRules/index.ctp:8
+#: Template/MainMenu/index.ctp:11
+msgid "New Gw Rule"
+msgstr ""
+
+#: Template/GwRules/index.ctp:17;22
+msgid "ルール検索"
+msgstr ""
+
+#: Template/GwRules/index.ctp:25
+msgid "両方"
+msgstr ""
+
+#: Template/GwRules/index.ctp:25
+msgid "有効ルール"
+msgstr ""
+
+#: Template/GwRules/index.ctp:25
+msgid "無効ルール"
+msgstr ""
+
+#: Template/GwRules/index.ctp:28
+msgid "start_time_from"
+msgstr ""
+
+#: Template/GwRules/index.ctp:28
+msgid "start_time_to"
+msgstr ""
+
+#: Template/GwRules/index.ctp:29
+msgid "end_time_from"
+msgstr ""
+
+#: Template/GwRules/index.ctp:29
+msgid "end_time_to"
+msgstr ""
+
+#: Template/GwRules/index.ctp:144
+msgid "チケット起票時"
+msgstr ""
+
+#: Template/GwRules/index.ctp:146
+msgid "チケットクローズ"
+msgstr ""
+
+#: Template/GwRules/index.ctp:148
+msgid "不明なルール"
+msgstr ""
+
+#: Template/GwRules/index.ctp:161
+msgid "BAOへ送信"
+msgstr ""
+
+#: Template/GwRules/index.ctp:163
+msgid "BAOへ送信しない"
+msgstr ""
+
+#: Template/GwRules/index.ctp:165
+msgid "キャンセルステータス"
+msgstr ""
+
+#: Template/GwRules/index.ctp:167
+msgid "クローズステータス"
+msgstr ""
+
+#: Template/GwRules/index.ctp:169
+msgid "K-ISYSメンテナンス"
+msgstr ""
+
+#: Template/GwRules/index.ctp:171
+msgid "不明なアクションNo"
+msgstr ""
+
+#: Template/GwRules/index.ctp:175
+msgid "Edit"
+msgstr ""
+
+#: Template/Layout/default.ctp:46
+msgid "BAO Gateway"
+msgstr ""
+
+#: Template/Layout/default.ctp:52
+msgid "LoginID"
+msgstr ""
+
+#: Template/Layout/default.ctp:60
+msgid "logout"
+msgstr ""
+
+#: Template/Layout/error.ctp:35
+msgid "Error"
+msgstr ""
+
+#: Template/Layout/error.ctp:43
+msgid "Back"
+msgstr ""
+
+#: Template/Users/login.ctp:7;13
+msgid "Login"
+msgstr ""
+
+#: View/Helper/InputSetHelper.php:56;57;58;59
+msgid "Display {0} records"
+msgstr ""
+
+#: View/Helper/InputSetHelper.php:80
+msgid "after"
+msgstr ""
+
+#: View/Helper/InputSetHelper.php:80
+msgid "before"
+msgstr ""
+
+#: View/Helper/InputSetHelper.php:80;84
+msgid "equal"
+msgstr ""
+
+#: View/Helper/InputSetHelper.php:84
+msgid "include"
+msgstr ""
+
+#: View/Helper/InputSetHelper.php:84
+msgid "not include"
+msgstr ""
+
+#: View/Helper/InputSetHelper.php:84
+msgid "blank"
+msgstr ""
+
+#: View/Helper/InputSetHelper.php:84
+msgid "not blank"
+msgstr ""
+
+#: View/Helper/InputSetHelper.php:96
+msgid "Select"
+msgstr ""
+
+#: View/Helper/InputSetHelper.php:100;119
+msgid "Clear"
+msgstr ""
+
+#: View/Helper/InputSetHelper.php:250
+msgid "search"
+msgstr ""
+
+#: View/Helper/InputSetHelper.php:251
+msgid "reset"
+msgstr ""
+
+#: View/Helper/InputSetHelper.php:274
+msgid "first"
+msgstr ""
+
+#: View/Helper/InputSetHelper.php:275
+msgid "previous"
+msgstr ""
+
+#: View/Helper/InputSetHelper.php:277
+msgid "next"
+msgstr ""
+
+#: View/Helper/InputSetHelper.php:278
+msgid "last"
+msgstr ""
+
+#: View/Helper/InputSetHelper.php:280
+msgid "Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total"
+msgstr ""
+

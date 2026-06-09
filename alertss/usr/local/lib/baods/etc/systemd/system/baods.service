@@ -1,0 +1,13 @@
+[Unit]
+After=mariadb.service
+
+[Service]
+# EnvironmentFileで環境変数ファイルを指定する
+EnvironmentFile=/etc/sysconfig/baogw_env
+ExecStart=/usr/local/lib/baods/bao_dicovery_server.py
+Restart=always
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target

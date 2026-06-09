@@ -1,0 +1,32 @@
+/* ========== ヘッダーー ================================================================================ */
+.top-bar.expanded .title-area {
+    background: #01545b;    /* primary */
+    /*background: #ff8c00;    /* secondary */*/
+}
+
+.top-bar.expanded,
+.top-bar,
+.top-bar-section ul li,
+.top-bar-section li:not(.has-form){
+    /* primary */
+    background: #116d76;
+   /* secondary */
+    /*background: #ffa500;    */
+}
+.top-bar-section li:not(.has-form) a:not(.button) {
+    background:#01545b
+}
+
+.top-bar-section li:not(.has-form) a:not(.button):hover {
+    /* primary */
+    background-color: #308e97;
+    background: #308e97;
+    /* secondary */
+    /*background-color: #ffd700;*/
+    /*background: #ffd700;*/
+}
+
+.title-area li:not(.has-form) a:not(.button):hover {
+    background-color: #308e97;    /* primary */
+    background: #308e97;          /* primary */
+}

@@ -1,0 +1,330 @@
+2023-03-02 16:52:37 notice: Undefined property: PagesController::$ZbxAuth in /var/www/html/baogw/src/Controller/AppController.php on line 47
+Request URL: /
+Client IP: 10.136.130.11
+Trace:
+Cake\Controller\Controller::__get() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 337
+App\Controller\AppController::beforeFilter() /var/www/html/baogw/src/Controller/AppController.php, line 47
+Cake\Event\EventManager::_callListener() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 309
+Cake\Event\EventManager::dispatch() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 286
+Cake\Controller\Controller::dispatchEvent() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php, line 92
+Cake\Controller\Controller::startupProcess() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 644
+Cake\Controller\ControllerFactory::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 129
+Cake\Controller\ControllerFactory::invoke() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 114
+Cake\Http\BaseApplication::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/BaseApplication.php, line 320
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 77
+Cake\Http\Middleware\CsrfProtectionMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/CsrfProtectionMiddleware.php, line 164
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Middleware\BodyParserMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/BodyParserMiddleware.php, line 157
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\RoutingMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php, line 186
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\AssetMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php, line 68
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Error\Middleware\ErrorHandlerMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php, line 131
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+DebugKit\Middleware\DebugKitMiddleware::process() /var/www/html/baogw/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php, line 60
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Runner::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 58
+Cake\Http\Server::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Server.php, line 90
+[main] /var/www/html/baogw/webroot/index.php, line 37
+
+2023-03-02 16:52:50 notice: Undefined property: PagesController::$ZbxAuth in /var/www/html/baogw/src/Controller/AppController.php on line 47
+Request URL: /
+Client IP: 10.136.130.11
+Trace:
+Cake\Controller\Controller::__get() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 337
+App\Controller\AppController::beforeFilter() /var/www/html/baogw/src/Controller/AppController.php, line 47
+Cake\Event\EventManager::_callListener() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 309
+Cake\Event\EventManager::dispatch() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 286
+Cake\Controller\Controller::dispatchEvent() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php, line 92
+Cake\Controller\Controller::startupProcess() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 644
+Cake\Controller\ControllerFactory::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 129
+Cake\Controller\ControllerFactory::invoke() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 114
+Cake\Http\BaseApplication::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/BaseApplication.php, line 320
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 77
+Cake\Http\Middleware\CsrfProtectionMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/CsrfProtectionMiddleware.php, line 164
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Middleware\BodyParserMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/BodyParserMiddleware.php, line 157
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\RoutingMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php, line 186
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\AssetMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php, line 68
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Error\Middleware\ErrorHandlerMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php, line 131
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+DebugKit\Middleware\DebugKitMiddleware::process() /var/www/html/baogw/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php, line 60
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Runner::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 58
+Cake\Http\Server::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Server.php, line 90
+[main] /var/www/html/baogw/webroot/index.php, line 37
+
+2023-03-02 17:04:50 notice: Undefined property: PagesController::$ZbxAuth in /var/www/html/baogw/src/Controller/AppController.php on line 47
+Request URL: /
+Client IP: 10.136.130.11
+Trace:
+Cake\Controller\Controller::__get() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 337
+App\Controller\AppController::beforeFilter() /var/www/html/baogw/src/Controller/AppController.php, line 47
+Cake\Event\EventManager::_callListener() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 309
+Cake\Event\EventManager::dispatch() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 286
+Cake\Controller\Controller::dispatchEvent() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php, line 92
+Cake\Controller\Controller::startupProcess() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 644
+Cake\Controller\ControllerFactory::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 129
+Cake\Controller\ControllerFactory::invoke() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 114
+Cake\Http\BaseApplication::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/BaseApplication.php, line 320
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 77
+Cake\Http\Middleware\CsrfProtectionMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/CsrfProtectionMiddleware.php, line 164
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Middleware\BodyParserMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/BodyParserMiddleware.php, line 157
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\RoutingMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php, line 186
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\AssetMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php, line 68
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Error\Middleware\ErrorHandlerMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php, line 131
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+DebugKit\Middleware\DebugKitMiddleware::process() /var/www/html/baogw/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php, line 60
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Runner::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 58
+Cake\Http\Server::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Server.php, line 90
+[main] /var/www/html/baogw/webroot/index.php, line 37
+
+2023-03-02 19:14:22 notice: Undefined property: PagesController::$ZbxAuth in /var/www/html/baogw/src/Controller/AppController.php on line 47
+Request URL: /
+Client IP: 10.136.130.11
+Trace:
+Cake\Controller\Controller::__get() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 337
+App\Controller\AppController::beforeFilter() /var/www/html/baogw/src/Controller/AppController.php, line 47
+Cake\Event\EventManager::_callListener() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 309
+Cake\Event\EventManager::dispatch() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 286
+Cake\Controller\Controller::dispatchEvent() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php, line 92
+Cake\Controller\Controller::startupProcess() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 644
+Cake\Controller\ControllerFactory::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 129
+Cake\Controller\ControllerFactory::invoke() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 114
+Cake\Http\BaseApplication::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/BaseApplication.php, line 320
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 77
+Cake\Http\Middleware\CsrfProtectionMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/CsrfProtectionMiddleware.php, line 164
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Middleware\BodyParserMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/BodyParserMiddleware.php, line 157
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\RoutingMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php, line 186
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\AssetMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php, line 68
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Error\Middleware\ErrorHandlerMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php, line 131
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+DebugKit\Middleware\DebugKitMiddleware::process() /var/www/html/baogw/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php, line 60
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Runner::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 58
+Cake\Http\Server::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Server.php, line 90
+[main] /var/www/html/baogw/webroot/index.php, line 37
+
+2023-03-06 10:15:48 notice: Undefined property: PagesController::$ZbxAuth in /var/www/html/baogw/src/Controller/AppController.php on line 47
+Request URL: /
+Client IP: 10.136.130.12
+Trace:
+Cake\Controller\Controller::__get() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 337
+App\Controller\AppController::beforeFilter() /var/www/html/baogw/src/Controller/AppController.php, line 47
+Cake\Event\EventManager::_callListener() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 309
+Cake\Event\EventManager::dispatch() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 286
+Cake\Controller\Controller::dispatchEvent() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php, line 92
+Cake\Controller\Controller::startupProcess() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 644
+Cake\Controller\ControllerFactory::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 129
+Cake\Controller\ControllerFactory::invoke() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 114
+Cake\Http\BaseApplication::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/BaseApplication.php, line 320
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 77
+Cake\Http\Middleware\CsrfProtectionMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/CsrfProtectionMiddleware.php, line 164
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Middleware\BodyParserMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/BodyParserMiddleware.php, line 157
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\RoutingMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php, line 186
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\AssetMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php, line 68
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Error\Middleware\ErrorHandlerMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php, line 131
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+DebugKit\Middleware\DebugKitMiddleware::process() /var/www/html/baogw/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php, line 60
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Runner::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 58
+Cake\Http\Server::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Server.php, line 90
+[main] /var/www/html/baogw/webroot/index.php, line 37
+
+2023-03-07 11:19:33 notice: Undefined property: PagesController::$ZbxAuth in /var/www/html/baogw/src/Controller/AppController.php on line 47
+Request URL: /
+Client IP: 10.136.130.11
+Trace:
+Cake\Controller\Controller::__get() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 337
+App\Controller\AppController::beforeFilter() /var/www/html/baogw/src/Controller/AppController.php, line 47
+Cake\Event\EventManager::_callListener() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 309
+Cake\Event\EventManager::dispatch() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 286
+Cake\Controller\Controller::dispatchEvent() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php, line 92
+Cake\Controller\Controller::startupProcess() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 644
+Cake\Controller\ControllerFactory::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 129
+Cake\Controller\ControllerFactory::invoke() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 114
+Cake\Http\BaseApplication::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/BaseApplication.php, line 320
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 77
+Cake\Http\Middleware\CsrfProtectionMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/CsrfProtectionMiddleware.php, line 164
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Middleware\BodyParserMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/BodyParserMiddleware.php, line 157
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\RoutingMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php, line 186
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\AssetMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php, line 68
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Error\Middleware\ErrorHandlerMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php, line 131
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+DebugKit\Middleware\DebugKitMiddleware::process() /var/www/html/baogw/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php, line 60
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Runner::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 58
+Cake\Http\Server::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Server.php, line 90
+[main] /var/www/html/baogw/webroot/index.php, line 37
+
+2023-03-07 19:56:28 notice: Undefined property: PagesController::$ZbxAuth in /var/www/html/baogw/src/Controller/AppController.php on line 47
+Request URL: /
+Client IP: 10.136.130.11
+Trace:
+Cake\Controller\Controller::__get() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 337
+App\Controller\AppController::beforeFilter() /var/www/html/baogw/src/Controller/AppController.php, line 47
+Cake\Event\EventManager::_callListener() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 309
+Cake\Event\EventManager::dispatch() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 286
+Cake\Controller\Controller::dispatchEvent() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php, line 92
+Cake\Controller\Controller::startupProcess() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 644
+Cake\Controller\ControllerFactory::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 129
+Cake\Controller\ControllerFactory::invoke() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 114
+Cake\Http\BaseApplication::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/BaseApplication.php, line 320
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 77
+Cake\Http\Middleware\CsrfProtectionMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/CsrfProtectionMiddleware.php, line 164
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Middleware\BodyParserMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/BodyParserMiddleware.php, line 157
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\RoutingMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php, line 186
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\AssetMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php, line 68
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Error\Middleware\ErrorHandlerMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php, line 131
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+DebugKit\Middleware\DebugKitMiddleware::process() /var/www/html/baogw/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php, line 60
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Runner::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 58
+Cake\Http\Server::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Server.php, line 90
+[main] /var/www/html/baogw/webroot/index.php, line 37
+
+2023-03-07 19:58:18 notice: Undefined property: PagesController::$ZbxAuth in /var/www/html/baogw/src/Controller/AppController.php on line 47
+Request URL: /
+Client IP: 10.136.130.11
+Trace:
+Cake\Controller\Controller::__get() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 337
+App\Controller\AppController::beforeFilter() /var/www/html/baogw/src/Controller/AppController.php, line 47
+Cake\Event\EventManager::_callListener() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 309
+Cake\Event\EventManager::dispatch() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 286
+Cake\Controller\Controller::dispatchEvent() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php, line 92
+Cake\Controller\Controller::startupProcess() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 644
+Cake\Controller\ControllerFactory::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 129
+Cake\Controller\ControllerFactory::invoke() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 114
+Cake\Http\BaseApplication::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/BaseApplication.php, line 320
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 77
+Cake\Http\Middleware\CsrfProtectionMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/CsrfProtectionMiddleware.php, line 164
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Middleware\BodyParserMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/BodyParserMiddleware.php, line 157
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\RoutingMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php, line 186
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\AssetMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php, line 68
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Error\Middleware\ErrorHandlerMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php, line 131
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+DebugKit\Middleware\DebugKitMiddleware::process() /var/www/html/baogw/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php, line 60
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Runner::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 58
+Cake\Http\Server::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Server.php, line 90
+[main] /var/www/html/baogw/webroot/index.php, line 37
+
+2023-03-07 19:58:44 notice: Undefined property: PagesController::$ZbxAuth in /var/www/html/baogw/src/Controller/AppController.php on line 47
+Request URL: /
+Client IP: 10.136.130.11
+Trace:
+Cake\Controller\Controller::__get() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 337
+App\Controller\AppController::beforeFilter() /var/www/html/baogw/src/Controller/AppController.php, line 47
+Cake\Event\EventManager::_callListener() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 309
+Cake\Event\EventManager::dispatch() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 286
+Cake\Controller\Controller::dispatchEvent() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php, line 92
+Cake\Controller\Controller::startupProcess() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 644
+Cake\Controller\ControllerFactory::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 129
+Cake\Controller\ControllerFactory::invoke() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 114
+Cake\Http\BaseApplication::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/BaseApplication.php, line 320
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 77
+Cake\Http\Middleware\CsrfProtectionMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/CsrfProtectionMiddleware.php, line 174
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Middleware\BodyParserMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/BodyParserMiddleware.php, line 157
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\RoutingMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php, line 186
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\AssetMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php, line 68
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Error\Middleware\ErrorHandlerMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php, line 131
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+DebugKit\Middleware\DebugKitMiddleware::process() /var/www/html/baogw/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php, line 60
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Runner::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 58
+Cake\Http\Server::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Server.php, line 90
+[main] /var/www/html/baogw/webroot/index.php, line 37
+
+2023-03-08 14:30:52 notice: Undefined property: PagesController::$ZbxAuth in /var/www/html/baogw/src/Controller/AppController.php on line 47
+Request URL: /
+Client IP: 10.136.130.11
+Trace:
+Cake\Controller\Controller::__get() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 337
+App\Controller\AppController::beforeFilter() /var/www/html/baogw/src/Controller/AppController.php, line 47
+Cake\Event\EventManager::_callListener() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 309
+Cake\Event\EventManager::dispatch() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 286
+Cake\Controller\Controller::dispatchEvent() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php, line 92
+Cake\Controller\Controller::startupProcess() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 644
+Cake\Controller\ControllerFactory::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 129
+Cake\Controller\ControllerFactory::invoke() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 114
+Cake\Http\BaseApplication::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/BaseApplication.php, line 320
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 77
+Cake\Http\Middleware\CsrfProtectionMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/CsrfProtectionMiddleware.php, line 164
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Middleware\BodyParserMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/BodyParserMiddleware.php, line 157
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\RoutingMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php, line 186
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\AssetMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php, line 68
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Error\Middleware\ErrorHandlerMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php, line 131
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+DebugKit\Middleware\DebugKitMiddleware::process() /var/www/html/baogw/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php, line 60
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Runner::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 58
+Cake\Http\Server::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Server.php, line 90
+[main] /var/www/html/baogw/webroot/index.php, line 37
+
+2023-03-08 19:09:34 notice: Undefined property: PagesController::$ZbxAuth in /var/www/html/baogw/src/Controller/AppController.php on line 47
+Request URL: /
+Client IP: 10.136.130.11
+Trace:
+Cake\Controller\Controller::__get() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 337
+App\Controller\AppController::beforeFilter() /var/www/html/baogw/src/Controller/AppController.php, line 47
+Cake\Event\EventManager::_callListener() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 309
+Cake\Event\EventManager::dispatch() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventManager.php, line 286
+Cake\Controller\Controller::dispatchEvent() /var/www/html/baogw/vendor/cakephp/cakephp/src/Event/EventDispatcherTrait.php, line 92
+Cake\Controller\Controller::startupProcess() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/Controller.php, line 644
+Cake\Controller\ControllerFactory::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 129
+Cake\Controller\ControllerFactory::invoke() /var/www/html/baogw/vendor/cakephp/cakephp/src/Controller/ControllerFactory.php, line 114
+Cake\Http\BaseApplication::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/BaseApplication.php, line 320
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 77
+Cake\Http\Middleware\CsrfProtectionMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/CsrfProtectionMiddleware.php, line 164
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Middleware\BodyParserMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Middleware/BodyParserMiddleware.php, line 157
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\RoutingMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/RoutingMiddleware.php, line 186
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Routing\Middleware\AssetMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Routing/Middleware/AssetMiddleware.php, line 68
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Error\Middleware\ErrorHandlerMiddleware::process() /var/www/html/baogw/vendor/cakephp/cakephp/src/Error/Middleware/ErrorHandlerMiddleware.php, line 131
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+DebugKit\Middleware\DebugKitMiddleware::process() /var/www/html/baogw/vendor/cakephp/debug_kit/src/Middleware/DebugKitMiddleware.php, line 60
+Cake\Http\Runner::handle() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 73
+Cake\Http\Runner::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Runner.php, line 58
+Cake\Http\Server::run() /var/www/html/baogw/vendor/cakephp/cakephp/src/Http/Server.php, line 90
+[main] /var/www/html/baogw/webroot/index.php, line 37
+

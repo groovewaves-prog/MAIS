@@ -1,0 +1,20 @@
+/* ========== ヘッダーー ================================================================================ */
+.top-bar.expanded .title-area {
+    background: #01545b;    /* primary */
+    background: #ff8c00;    /* secondary */
+}
+
+.top-bar.expanded,
+.top-bar,
+.top-bar-section ul li,
+.top-bar-section li:not(.has-form) a:not(.button) {
+    background: #116d76;    /* primary */
+    background: #ffa500;    /* secondary */
+}
+
+.top-bar-section li:not(.has-form) a:not(.button):hover {
+    background-color: #308e97;    /* primary */
+    background: #308e97;          /* primary */
+    background-color: #ffd700;    /* secondary */
+    background: #ffd700;          /* secondary */
+}

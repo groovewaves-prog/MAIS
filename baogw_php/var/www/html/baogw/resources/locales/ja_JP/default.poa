@@ -1,0 +1,769 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2017-06-30 06:10+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller/BbbbsController.php:57;82
+msgid "ログインしてください。"
+msgstr "ログインしてね。{0}"
+
+#: Controller/BbbbsController.php:61;86
+msgid "The bbbb could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/BbbbsController.php:104
+msgid "The bbbb has been deleted."
+msgstr ""
+
+#: Controller/BbbbsController.php:106
+msgid "The bbbb could not be deleted. Please, try again."
+msgstr ""
+
+#: Controller/BbbbtttController.php:57;82
+msgid "The bbbbttt has been saved."
+msgstr ""
+
+#: Controller/BbbbtttController.php:61;86
+msgid "The bbbbttt could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/BbbbtttController.php:104
+msgid "The bbbbttt has been deleted."
+msgstr ""
+
+#: Controller/BbbbtttController.php:106
+msgid "The bbbbttt could not be deleted. Please, try again."
+msgstr ""
+
+#: Controller/BooksController.php:57;82
+msgid "The book has been saved."
+msgstr ""
+
+#: Controller/BooksController.php:61;86
+msgid "The book could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/BooksController.php:104
+msgid "The book has been deleted."
+msgstr ""
+
+#: Controller/BooksController.php:106
+msgid "The book could not be deleted. Please, try again."
+msgstr ""
+
+#: Controller/GwRulesController.php:57;82
+msgid "The gw rule has been saved."
+msgstr "ルールID {0} を更新しました。"
+
+#: Controller/GwRulesController.php:61;86
+msgid "The gw rule could not be saved. Please, try again."
+msgstr "ルールID {0} を更新できませんでした。再度、実施してください。"
+
+msgid "The gw rule has been added."
+msgstr "ルールID {0} を追加しました。"
+
+msgid "The gw rule could not be added. Please, try again."
+msgstr "ルールを追加できませんでした。再度、実施してください。"
+
+#: Controller/GwRulesController.php:104
+msgid "The gw rule has been deleted."
+msgstr ""
+
+msgid "The gw rule has been disabled."
+msgstr "ルールを無効化しました。
+
+msgid "The gw rule could not be disabled. Please, try again."
+msgstr "ルールを無効化できませんでした。再度、実施してください。
+
+#: Controller/GwRulesController.php:106
+msgid "The gw rule could not be deleted. Please, try again."
+msgstr "削除できませんでした。"
+
+
+#: Template/GwRules/add.ctp:8
+#: Template/GwRules/edit.ctp:8
+#: Template/GwRules/index.ctp:9;27
+#: Template/GwRules/view.ctp:9
+msgid "Actions"
+msgstr "操作"
+
+
+
+#: Template/GwRules/add.ctp:27
+msgid "Submit"
+msgstr "保存する"
+
+#: Template/GwRules/edit.ctp:33
+msgid "Submit"
+msgstr "保存する"
+
+
+#: Template/GwRules/edit.ctp:10
+#: Template/GwRules/index.ctp:45
+msgid "Delete"
+msgstr "無効化"
+
+msgid "Disable"
+msgstr "無効化"
+
+msgid "To BulkUpdate"
+msgstr "チェックしたレコードの一括更新画面へ"
+
+#: Template/Bbbbs/edit.ctp:12
+#: Template/Bbbbs/index.ctp:31
+#: Template/Bbbbs/view.ctp:11
+#: Template/Bbbbttt/edit.ctp:12
+#: Template/Bbbbttt/index.ctp:31
+#: Template/Bbbbttt/view.ctp:11
+#: Template/Books/edit.ctp:12
+#: Template/Books/index.ctp:31
+#: Template/Books/view.ctp:11
+#: Template/GwRules/edit.ctp:12
+#: Template/GwRules/index.ctp:45
+#: Template/GwRules/view.ctp:11
+msgid "Are you sure you want to delete # {0}?"
+msgstr " {0}を無効化してもよろしいですか？"
+
+msgid "Are you sure you want to disable # {0}?"
+msgstr "ルールID{0}を無効化してもよろしいですか？"
+
+#: Template/Bbbbs/edit.ctp:21
+#: Template/Bbbbs/view.ctp:10
+msgid "Edit Bbbb"
+msgstr ""
+
+#: Template/Bbbbs/index.ctp:10
+#: Template/Bbbbs/view.ctp:13
+msgid "New Bbbb"
+msgstr ""
+
+#: Template/Bbbbs/index.ctp:14
+msgid "Bbbbs"
+msgstr ""
+
+#: Template/Bbbbs/index.ctp:29
+#: Template/Bbbbttt/index.ctp:29
+#: Template/Books/index.ctp:29
+#: Template/GwRules/index.ctp:43
+msgid "View"
+msgstr "詳細"
+
+#: Template/Bbbbs/index.ctp:30
+#: Template/Bbbbttt/index.ctp:30
+#: Template/Books/index.ctp:30
+#: Template/GwRules/index.ctp:44
+msgid "Edit"
+msgstr "編集"
+
+#: Template/Bbbbs/index.ctp:39
+#: Template/Bbbbttt/index.ctp:39
+#: Template/Books/index.ctp:39
+#: Template/GwRules/index.ctp:53
+msgid "first"
+msgstr "最初のページ"
+
+#: Template/Bbbbs/index.ctp:40
+#: Template/Bbbbttt/index.ctp:40
+#: Template/Books/index.ctp:40
+#: Template/GwRules/index.ctp:54
+msgid "previous"
+msgstr "戻る"
+
+#: Template/Bbbbs/index.ctp:42
+#: Template/Bbbbttt/index.ctp:42
+#: Template/Books/index.ctp:42
+#: Template/GwRules/index.ctp:56
+msgid "next"
+msgstr "次へ"
+
+#: Template/Bbbbs/index.ctp:43
+#: Template/Bbbbttt/index.ctp:43
+#: Template/Books/index.ctp:43
+#: Template/GwRules/index.ctp:57
+msgid "last"
+msgstr "最後のページ"
+
+#: Template/Bbbbs/index.ctp:45
+#: Template/Bbbbttt/index.ctp:45
+#: Template/Books/index.ctp:45
+#: Template/GwRules/index.ctp:59
+msgid "Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total"
+#msgstr "{{pages}}ページ中、{{page}}ページ目を表示しています。 全部で{{count}}レコードあります。現在、{{current}}レコード表示しています。"
+msgstr "{{current}} / {{count}}件  -  {{page}} / {{pages}}ページ"
+
+#: Template/Bbbbs/view.ctp:11
+msgid "Delete Bbbb"
+msgstr ""
+
+#: Template/Bbbbs/view.ctp:20
+#: Template/Bbbbttt/view.ctp:20
+#: Template/Books/view.ctp:20
+msgid "Id"
+msgstr ""
+
+#: Template/Bbbbs/view.ctp:24
+#: Template/Bbbbttt/view.ctp:24
+#: Template/Books/view.ctp:24
+msgid "Price"
+msgstr ""
+
+#: Template/Bbbbs/view.ctp:29
+#: Template/Bbbbttt/view.ctp:29
+#: Template/Books/view.ctp:29
+msgid "Title"
+msgstr ""
+
+#: Template/Bbbbs/view.ctp:33
+#: Template/Bbbbttt/view.ctp:33
+#: Template/Books/view.ctp:33
+msgid "Autor"
+msgstr ""
+
+#: Template/Bbbbttt/add.ctp:9
+#: Template/Bbbbttt/edit.ctp:15
+#: Template/Bbbbttt/view.ctp:12
+msgid "List Bbbbttt"
+msgstr ""
+
+#: Template/Bbbbttt/add.ctp:15
+msgid "Add Bbbbttt"
+msgstr ""
+
+#: Template/Bbbbttt/edit.ctp:21
+#: Template/Bbbbttt/view.ctp:10
+msgid "Edit Bbbbttt"
+msgstr ""
+
+#: Template/Bbbbttt/index.ctp:10
+#: Template/Bbbbttt/view.ctp:13
+msgid "New Bbbbttt"
+msgstr ""
+
+#: Template/Bbbbttt/index.ctp:14
+msgid "Bbbbttt"
+msgstr ""
+
+#: Template/Bbbbttt/view.ctp:11
+msgid "Delete Bbbbttt"
+msgstr ""
+
+#: Template/Books/add.ctp:9
+#: Template/Books/edit.ctp:15
+#: Template/Books/view.ctp:12
+msgid "List Books"
+msgstr ""
+
+#: Template/Books/add.ctp:15
+msgid "Add Book"
+msgstr ""
+
+#: Template/Books/edit.ctp:21
+#: Template/Books/view.ctp:10
+msgid "Edit Book"
+msgstr ""
+
+#: Template/Books/index.ctp:10
+#: Template/Books/view.ctp:13
+msgid "New Book"
+msgstr ""
+
+#: Template/Books/index.ctp:14
+msgid "Books"
+msgstr ""
+
+#: Template/Books/view.ctp:11
+msgid "Delete Book"
+msgstr ""
+
+#: Template/GwRules/add.ctp:9
+#: Template/GwRules/edit.ctp:15
+#: Template/GwRules/view.ctp:12
+msgid "List Gw Rules"
+msgstr "ルール一覧へ戻る"
+
+#: Template/GwRules/add.ctp:15
+msgid "Add Gw Rule"
+msgstr "ルール追加"
+
+#: Template/GwRules/edit.ctp:21
+#: Template/GwRules/view.ctp:10
+msgid "Edit Gw Rule"
+msgstr "ルール編集"
+
+#: Template/GwRules/index.ctp:10
+#: Template/GwRules/view.ctp:13
+msgid "New Gw Rule"
+msgstr "新規ルール作成"
+
+#: Template/GwRules/index.ctp:14
+msgid "Gw Rules"
+msgstr "アラームチケットステータス"
+
+#: Template/GwRules/view.ctp:11
+msgid "Delete Gw Rule"
+msgstr "ルール削除"
+
+#: Template/GwRules/view.ctp:20
+msgid "Customer Name"
+msgstr "顧客名"
+
+#: Template/GwRules/view.ctp:24
+msgid "Hostname"
+msgstr "ホスト名"
+
+#: Template/GwRules/view.ctp:28
+msgid "ci_name"
+msgstr "アラーム名"
+
+msgid "Ci Name"
+msgstr "アラーム名"
+
+msgid "Ci_Name"
+msgstr "アラーム名"
+
+#: Template/GwRules/view.ctp:32
+msgid "rule_id"
+msgstr "ルール ID"
+
+msgid "rule id"
+msgstr "ルール ID"
+
+msgid "Rule Id"
+msgstr "ルール ID"
+
+msgid "Rule"
+msgstr "ルール ID"
+
+msgid "[Select]"
+msgstr "選択"
+
+msgid "Select"
+msgstr "選択"
+
+#: Template/GwRules/view.ctp:36
+msgid "Rule Set"
+msgstr "ルールセット"
+
+#: Template/GwRules/view.ctp:40
+msgid "action_no"
+msgstr "アクションNo"
+
+msgid "Action No"
+msgstr "アクションNo"
+
+
+#:
+msgid "Search"
+msgstr "検索"
+
+#:
+msgid "Clear"
+msgstr "リセット"
+
+#:
+msgid "BulkUpdate"
+msgstr "一括更新"
+
+msgid "saveas"
+msgstr "上書き保存"
+
+msgid "Action"
+msgstr "アクションNo"
+
+#: Template/GwRules/view.ctp:43
+msgid "action:1"
+msgstr "BAaO"
+
+#: Template/GwRules/view.ctp:44
+msgid "Start Time"
+msgstr "適用開始日時"
+
+#: Template/GwRules/view.ctp:48
+msgid "End Time"
+msgstr "終了日時"
+
+#: Template/GwRules/view.ctp:52
+msgid "Rule Status"
+msgstr "有効/無効"
+
+#: Template/GwRules/view.ctp:53
+msgid "Yes"
+msgstr "有効"
+
+#: Template/GwRules/view.ctp:53
+msgid "No"
+msgstr "無効"
+
+#: Template/Layout/error.ctp:35
+msgid "Error"
+msgstr ""
+
+#: Template/Layout/error.ctp:43
+msgid "Back"
+msgstr ""
+
+$this->loadModel('Hosts');
+$hosts = $this->Hosts->find();
+
+
+#: Controller/GwEventsController.php:57;82
+msgid "The gw event has been saved."
+msgstr "保存しました。"
+
+#: Controller/GwEventsController.php:61;86
+msgid "The gw event could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/GwEventsController.php:104
+msgid "The gw event has been deleted."
+msgstr ""
+
+#: Controller/GwEventsController.php:106
+msgid "The gw event could not be deleted. Please, try again."
+msgstr ""
+
+
+#: Template/GwEvents/add.ctp:9
+#: Template/GwEvents/edit.ctp:15
+#: Template/GwEvents/view.ctp:12
+msgid "List Gw Events"
+msgstr "アラーム一覧画面"
+
+
+#: Template/GwEvents/add.ctp:15
+msgid "Add Gw Event"
+msgstr ""
+
+#: Template/GwEvents/edit.ctp:21
+#: Template/GwEvents/view.ctp:10
+msgid "Edit Gw Event"
+msgstr "補記編集/承認"
+
+msgid "Op Comment Edit"
+msgstr "補記情報編集"
+
+msgid "Op_Comment Approve Edit"
+msgstr "補記編集/承認"
+
+
+
+#: Template/GwEvents/index.ctp:10
+#: Template/GwEvents/view.ctp:13
+msgid "New Gw Event"
+msgstr ""
+
+#: Template/GwEvents/index.ctp:14
+msgid "Gw Events"
+msgstr "アラーム一覧画面"
+
+#: Template/GwEvents/view.ctp:11
+msgid "Delete Gw Event"
+msgstr ""
+
+
+#: Template/GwEvents/view.ctp:28
+msgid "Ci Name"
+msgstr "アラーム名"
+
+#: Template/GwEvents/view.ctp:32
+msgid "Device Id"
+msgstr "個別監視装置名"
+
+#: Template/GwEvents/view.ctp:36
+msgid "Alarm Status"
+msgstr "アラーム種別"
+
+#: Template/GwEvents/view.ctp:40
+msgid "Summary"
+msgstr "アラーム詳細"
+
+#: Template/GwEvents/view.ctp:44
+msgid "Checked User"
+msgstr "承認ユーザ"
+
+#: Template/GwEvents/view.ctp:48
+msgid "Op Comment"
+msgstr "補記情報"
+
+#: Template/GwEvents/view.ctp:52
+
+
+#: Template/GwEvents/view.ctp:56
+msgid "Event Status"
+msgstr "イベントステータス"
+
+#: Template/GwEvents/view.ctp:60
+msgid "Gw Incident Id"
+msgstr "GWインシデントID"
+
+#: Template/GwEvents/view.ctp:64
+msgid "Detected Host"
+msgstr "検知Zabbix"
+
+#: Template/GwEvents/view.ctp:68
+msgid "Update Time"
+msgstr "更新時間"
+
+#: Template/GwEvents/view.ctp:72
+msgid "Detected Time"
+msgstr "検知時間"
+
+#: Template/GwEvents/view.ctp:76
+msgid "Alarm Time"
+msgstr "発生時刻"
+#msgstr "発生時刻(JST)"
+
+msgid "Alarm Time From"
+msgstr "発生時刻(以降)"
+
+msgid "Alarm Time To"
+msgstr "発生時刻(以前)"
+
+#: Template/GwEvents/view.ctp:80
+msgid "Checked Time"
+msgstr "承認"
+
+
+msgid "Approve Edit"
+msgstr "承認"
+
+msgid "Approve Status"
+msgstr "承認"
+
+msgid "Kisys Status"
+msgstr "BAO送信状況"
+
+msgid "Device"
+msgstr "個別監視装置名"
+
+msgid "device"
+msgstr "個別監視装置名"
+
+msgid "Incident Status"
+msgstr "インシデント ステータス"
+
+msgid "Kisys Incidentid"
+msgstr "KISYSインシデントID"
+
+msgid "logout"
+msgstr "ログアウト"
+
+msgid "LoginID"
+msgstr "ログインID"
+
+msgid "To Main Menu"
+msgstr "メインメニューへ"
+
+msgid "Main Menu"
+msgstr "メインメニュー"
+
+msgid "Login"
+msgstr "ログイン"
+
+msgid "Username"
+msgstr "ユーザ名"
+
+msgid "Password"
+msgstr "パスワード"
+
+msgid "username"
+msgstr "ユーザ名"
+
+msgid "password"
+msgstr "パスワード"
+
+msgid "gw_event_id"
+msgstr "イベント ID"
+
+msgid "Gw Event"
+msgstr "イベント ID"
+
+msgid "alarm_time"
+msgstr "発生時刻"
+
+msgid "alarm_status"
+msgstr "アラーム種別"
+
+msgid "checked_time"
+msgstr "承認"
+
+msgid "customer_name"
+msgstr "顧客名"
+
+msgid "hostname"
+msgstr "ホスト名"
+
+msgid "summary"
+msgstr "アラーム詳細"
+
+msgid "op_comment"
+msgstr "補記情報"
+
+msgid "kisys_status"
+msgstr "BAO送信状況"
+
+msgid "actions"
+msgstr "操作"
+
+msgid "Reset"
+msgstr "リセット"
+
+msgid "Clear"
+msgstr "クリア"
+
+msgid "alarm_status_error"
+msgstr "error"
+
+msgid "alarm_status_normal"
+msgstr "normal"
+
+msgid "alarm_status_sec"
+msgstr "sec"
+
+msgid "alarm_status_info"
+msgstr "info"
+
+
+
+msgid "all_check_alarm_status"
+msgstr "一括チェック"
+
+msgid "disp_col_all_check"
+msgstr "一括チェック"
+
+msgid "flag_bulk_update_all_check"
+msgstr "一括チェック"
+
+msgid "disp_col_gw_event_id"
+msgstr "イベント ID"
+
+msgid "disp_col_alarm_time"
+msgstr "発生時刻"
+
+msgid "disp_col_alarm_status"
+msgstr "アラーム種別"
+
+msgid "disp_col_customer_name"
+msgstr "顧客名"
+
+msgid "disp_col_hostname"
+msgstr "ホスト名"
+
+msgid "disp_col_ci_name"
+msgstr "アラーム名"
+
+msgid "disp_col_summary"
+msgstr "アラーム詳細"
+
+msgid "disp_col_device"
+msgstr "個別監視装置名"
+
+msgid "disp_col_checked_time"
+msgstr "承認"
+
+msgid "disp_col_op_comment"
+msgstr "補記情報"
+
+msgid "disp_col_kisys_status"
+msgstr "BAO送信状況"
+
+msgid "disp_col_actions"
+msgstr "操作"
+
+msgid "search"
+msgstr "検索"
+
+msgid "reset"
+msgstr "リセット"
+
+msgid "disp_col_rule_id"
+msgstr "ルール ID"
+
+msgid "disp_col_rule_status"
+msgstr "有効/無効"
+
+msgid "disp_col_rule_set"
+msgstr "ルールセット"
+
+msgid "disp_col_start_time"
+msgstr "適用開始日時"
+
+msgid "disp_col_end_time"
+msgstr "終了日時"
+
+msgid "disp_col_customer_name"
+msgstr "顧客名"
+
+msgid "disp_col_hostname"
+msgstr "ホスト名"
+
+msgid "disp_col_ci_name"
+msgstr "アラーム名"
+
+msgid "disp_col_action_no"
+msgstr "アクションNo"
+
+msgid "disp_col_actions"
+msgstr "操作"
+
+msgid "action_no_0"
+msgstr "0:BAOへ送信"
+
+msgid "action_no_1"
+msgstr "1:BAOへ送信しない"
+
+msgid "action_no_2"
+msgstr "2:キャンセルステータス"
+
+msgid "action_no_3"
+msgstr "3:クローズステータス"
+
+msgid "action_no_4"
+msgstr "4:K-ISYSメンテナンス"
+
+msgid "rule_set_1"
+msgstr "1:チケット起票時"
+
+msgid "rule_set_2"
+msgstr "2:チケットクローズ時"
+
+msgid "rule_set"
+msgstr "ルールセット"
+
+msgid "all_check_rule_set"
+msgstr "一括チェック"
+
+msgid "all_check_action_no"
+msgstr "一括チェック"
+
+msgid "start_time_from"
+msgstr "適用開始日時(以降)"
+
+msgid "start_time_to"
+msgstr "適用開始日時(以前)"
+
+msgid "end_time_from"
+msgstr "適用終了日時(以降)"
+
+msgid "end_time_to"
+msgstr "適用終了日時(以前)"
+
+msgid "alarm_status_syserror"
+msgstr "syserror"
+
+msgid "alarm_status_sysnormal"
+msgstr "sysnormal"
+
+msgid "Display {0} records"
+msgstr "{0}件表示"

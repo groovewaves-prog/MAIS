@@ -1,0 +1,373 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2017-06-30 06:10+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller/BbbbsController.php:57;82
+msgid "The bbbb has been saved."
+msgstr ""
+
+#: Controller/BbbbsController.php:61;86
+msgid "The bbbb could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/BbbbsController.php:104
+msgid "The bbbb has been deleted."
+msgstr ""
+
+#: Controller/BbbbsController.php:106
+msgid "The bbbb could not be deleted. Please, try again."
+msgstr ""
+
+#: Controller/BbbbtttController.php:57;82
+msgid "The bbbbttt has been saved."
+msgstr ""
+
+#: Controller/BbbbtttController.php:61;86
+msgid "The bbbbttt could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/BbbbtttController.php:104
+msgid "The bbbbttt has been deleted."
+msgstr ""
+
+#: Controller/BbbbtttController.php:106
+msgid "The bbbbttt could not be deleted. Please, try again."
+msgstr ""
+
+#: Controller/BooksController.php:57;82
+msgid "The book has been saved."
+msgstr ""
+
+#: Controller/BooksController.php:61;86
+msgid "The book could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/BooksController.php:104
+msgid "The book has been deleted."
+msgstr ""
+
+#: Controller/BooksController.php:106
+msgid "The book could not be deleted. Please, try again."
+msgstr ""
+
+#: Controller/GwRulesController.php:57;82
+msgid "The gw rule has been saved."
+msgstr ""
+
+#: Controller/GwRulesController.php:61;86
+msgid "The gw rule could not be saved. Please, try again."
+msgstr ""
+
+#: Controller/GwRulesController.php:104
+msgid "The gw rule has been deleted."
+msgstr ""
+
+#: Controller/GwRulesController.php:106
+msgid "The gw rule could not be deleted. Please, try again."
+msgstr ""
+
+#: Template/Bbbbs/add.ctp:8
+#: Template/Bbbbs/edit.ctp:8
+#: Template/Bbbbs/index.ctp:9;20
+#: Template/Bbbbs/view.ctp:9
+#: Template/Bbbbttt/add.ctp:8
+#: Template/Bbbbttt/edit.ctp:8
+#: Template/Bbbbttt/index.ctp:9;20
+#: Template/Bbbbttt/view.ctp:9
+#: Template/Books/add.ctp:8
+#: Template/Books/edit.ctp:8
+#: Template/Books/index.ctp:9;20
+#: Template/Books/view.ctp:9
+#: Template/GwRules/add.ctp:8
+#: Template/GwRules/edit.ctp:8
+#: Template/GwRules/index.ctp:9;27
+#: Template/GwRules/view.ctp:9
+msgid "Actions"
+msgstr ""
+
+#: Template/Bbbbs/add.ctp:9
+#: Template/Bbbbs/edit.ctp:15
+#: Template/Bbbbs/view.ctp:12
+msgid "List Bbbbs"
+msgstr ""
+
+#: Template/Bbbbs/add.ctp:15
+msgid "Add Bbbb"
+msgstr ""
+
+#: Template/Bbbbs/add.ctp:22
+#: Template/Bbbbs/edit.ctp:28
+#: Template/Bbbbttt/add.ctp:22
+#: Template/Bbbbttt/edit.ctp:28
+#: Template/Books/add.ctp:22
+#: Template/Books/edit.ctp:28
+#: Template/GwRules/add.ctp:27
+#: Template/GwRules/edit.ctp:33
+msgid "Submit"
+msgstr ""
+
+#: Template/Bbbbs/edit.ctp:10
+#: Template/Bbbbs/index.ctp:31
+#: Template/Bbbbttt/edit.ctp:10
+#: Template/Bbbbttt/index.ctp:31
+#: Template/Books/edit.ctp:10
+#: Template/Books/index.ctp:31
+#: Template/GwRules/edit.ctp:10
+#: Template/GwRules/index.ctp:45
+msgid "Delete"
+msgstr ""
+
+#: Template/Bbbbs/edit.ctp:12
+#: Template/Bbbbs/index.ctp:31
+#: Template/Bbbbs/view.ctp:11
+#: Template/Bbbbttt/edit.ctp:12
+#: Template/Bbbbttt/index.ctp:31
+#: Template/Bbbbttt/view.ctp:11
+#: Template/Books/edit.ctp:12
+#: Template/Books/index.ctp:31
+#: Template/Books/view.ctp:11
+#: Template/GwRules/edit.ctp:12
+#: Template/GwRules/index.ctp:45
+#: Template/GwRules/view.ctp:11
+msgid "Are you sure you want to delete # {0}?"
+msgstr ""
+
+#: Template/Bbbbs/edit.ctp:21
+#: Template/Bbbbs/view.ctp:10
+msgid "Edit Bbbb"
+msgstr ""
+
+#: Template/Bbbbs/index.ctp:10
+#: Template/Bbbbs/view.ctp:13
+msgid "New Bbbb"
+msgstr ""
+
+#: Template/Bbbbs/index.ctp:14
+msgid "Bbbbs"
+msgstr ""
+
+#: Template/Bbbbs/index.ctp:29
+#: Template/Bbbbttt/index.ctp:29
+#: Template/Books/index.ctp:29
+#: Template/GwRules/index.ctp:43
+msgid "View"
+msgstr ""
+
+#: Template/Bbbbs/index.ctp:30
+#: Template/Bbbbttt/index.ctp:30
+#: Template/Books/index.ctp:30
+#: Template/GwRules/index.ctp:44
+msgid "Edit"
+msgstr ""
+
+#: Template/Bbbbs/index.ctp:39
+#: Template/Bbbbttt/index.ctp:39
+#: Template/Books/index.ctp:39
+#: Template/GwRules/index.ctp:53
+msgid "first"
+msgstr ""
+
+#: Template/Bbbbs/index.ctp:40
+#: Template/Bbbbttt/index.ctp:40
+#: Template/Books/index.ctp:40
+#: Template/GwRules/index.ctp:54
+msgid "previous"
+msgstr ""
+
+#: Template/Bbbbs/index.ctp:42
+#: Template/Bbbbttt/index.ctp:42
+#: Template/Books/index.ctp:42
+#: Template/GwRules/index.ctp:56
+msgid "next"
+msgstr ""
+
+#: Template/Bbbbs/index.ctp:43
+#: Template/Bbbbttt/index.ctp:43
+#: Template/Books/index.ctp:43
+#: Template/GwRules/index.ctp:57
+msgid "last"
+msgstr ""
+
+#: Template/Bbbbs/index.ctp:45
+#: Template/Bbbbttt/index.ctp:45
+#: Template/Books/index.ctp:45
+#: Template/GwRules/index.ctp:59
+msgid "Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total"
+msgstr ""
+
+#: Template/Bbbbs/view.ctp:11
+msgid "Delete Bbbb"
+msgstr ""
+
+#: Template/Bbbbs/view.ctp:20
+#: Template/Bbbbttt/view.ctp:20
+#: Template/Books/view.ctp:20
+msgid "Id"
+msgstr ""
+
+#: Template/Bbbbs/view.ctp:24
+#: Template/Bbbbttt/view.ctp:24
+#: Template/Books/view.ctp:24
+msgid "Price"
+msgstr ""
+
+#: Template/Bbbbs/view.ctp:29
+#: Template/Bbbbttt/view.ctp:29
+#: Template/Books/view.ctp:29
+msgid "Title"
+msgstr ""
+
+#: Template/Bbbbs/view.ctp:33
+#: Template/Bbbbttt/view.ctp:33
+#: Template/Books/view.ctp:33
+msgid "Autor"
+msgstr ""
+
+#: Template/Bbbbttt/add.ctp:9
+#: Template/Bbbbttt/edit.ctp:15
+#: Template/Bbbbttt/view.ctp:12
+msgid "List Bbbbttt"
+msgstr ""
+
+#: Template/Bbbbttt/add.ctp:15
+msgid "Add Bbbbttt"
+msgstr ""
+
+#: Template/Bbbbttt/edit.ctp:21
+#: Template/Bbbbttt/view.ctp:10
+msgid "Edit Bbbbttt"
+msgstr ""
+
+#: Template/Bbbbttt/index.ctp:10
+#: Template/Bbbbttt/view.ctp:13
+msgid "New Bbbbttt"
+msgstr ""
+
+#: Template/Bbbbttt/index.ctp:14
+msgid "Bbbbttt"
+msgstr ""
+
+#: Template/Bbbbttt/view.ctp:11
+msgid "Delete Bbbbttt"
+msgstr ""
+
+#: Template/Books/add.ctp:9
+#: Template/Books/edit.ctp:15
+#: Template/Books/view.ctp:12
+msgid "List Books"
+msgstr ""
+
+#: Template/Books/add.ctp:15
+msgid "Add Book"
+msgstr ""
+
+#: Template/Books/edit.ctp:21
+#: Template/Books/view.ctp:10
+msgid "Edit Book"
+msgstr ""
+
+#: Template/Books/index.ctp:10
+#: Template/Books/view.ctp:13
+msgid "New Book"
+msgstr ""
+
+#: Template/Books/index.ctp:14
+msgid "Books"
+msgstr ""
+
+#: Template/Books/view.ctp:11
+msgid "Delete Book"
+msgstr ""
+
+#: Template/GwRules/add.ctp:9
+#: Template/GwRules/edit.ctp:15
+#: Template/GwRules/view.ctp:12
+msgid "List Gw Rules"
+msgstr ""
+
+#: Template/GwRules/add.ctp:15
+msgid "Add Gw Rule"
+msgstr ""
+
+#: Template/GwRules/edit.ctp:21
+#: Template/GwRules/view.ctp:10
+msgid "Edit Gw Rule"
+msgstr ""
+
+#: Template/GwRules/index.ctp:10
+#: Template/GwRules/view.ctp:13
+msgid "New Gw Rule"
+msgstr ""
+
+#: Template/GwRules/index.ctp:14
+msgid "Gw Rules"
+msgstr "ルール一覧"
+
+#: Template/GwRules/view.ctp:11
+msgid "Delete Gw Rule"
+msgstr "ルール削除"
+
+#: Template/GwRules/view.ctp:20
+msgid "Customer Name"
+msgstr "顧客名"
+
+#: Template/GwRules/view.ctp:24
+msgid "Hostname"
+msgstr ""
+
+#: Template/GwRules/view.ctp:28
+msgid "Ciname"
+msgstr ""
+
+#: Template/GwRules/view.ctp:32
+msgid "Ruleid"
+msgstr ""
+
+#: Template/GwRules/view.ctp:36
+msgid "Rule Set"
+msgstr ""
+
+#: Template/GwRules/view.ctp:40
+msgid "Action"
+msgstr ""
+
+#: Template/GwRules/view.ctp:44
+msgid "Start Time"
+msgstr ""
+
+#: Template/GwRules/view.ctp:48
+msgid "End Time"
+msgstr ""
+
+#: Template/GwRules/view.ctp:52
+msgid "Rule Status"
+msgstr ""
+
+#: Template/GwRules/view.ctp:53
+msgid "Yes"
+msgstr ""
+
+#: Template/GwRules/view.ctp:53
+msgid "No"
+msgstr ""
+
+#: Template/Layout/error.ctp:35
+msgid "Error"
+msgstr ""
+
+#: Template/Layout/error.ctp:43
+msgid "Back"
+msgstr ""
+
