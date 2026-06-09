@@ -1,0 +1,529 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+## 概要 ##
+send_to_bao.py
+gw_events から event_status = 0 を抜き出し処理
+"""
+
+## 共通 ########################## 別途、共通設定ファイルへ
+
+## import ##
+import traceback
+from datetime import datetime as dt
+import os
+import fcntl
+import time
+import logging
+import logging.handlers
+import subprocess
+import mysql.connector
+import gwcommon as COM
+
+##################################
+
+## スクリプトのパス、ファイル名を取得
+# __file__ = '/usr/lib/zabbix/alertscripts/send_to_bao.py'
+SCRIPT_FILE = os.path.basename(__file__)
+
+""" log出力設定 ※rsyslogd に渡す設定 """
+LOGGER = logging.getLogger(SCRIPT_FILE)
+LOGGER.setLevel(logging.DEBUG) # 出力レベルの設定
+HANDLER = logging.handlers.SysLogHandler(address=('localhost', 514), facility='local6') # 出力先の設定
+FORMATTER = logging.Formatter('%(name)s[%(process)d]: %(levelname)s: [%(lineno)d]%(message)s')
+HANDLER.formatter = FORMATTER
+LOGGER.addHandler(HANDLER)
+
+def lock_file(locktarget):
+    """
+    ファイルロックを試み、ロックできなければ終了
+    """
+    lock_file_name = '%s.lock' % (locktarget)
+    fp_lock = open(lock_file_name, 'w')
+    try:
+        fcntl.flock(fp_lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except OSError as msg:
+        LOGGER.info('Another process is running, so exit.')
+        LOGGER.info(msg)
+        exit()
+    return fp_lock
+
+def file_check(filename):
+    """
+    動作フラグファイル(/var/lib/baogw/ 配下) の有無をチェック
+    """
+    check_file = '/var/lib/baogw/' + filename
+    return os.path.exists(check_file)
+
+def connect_db():
+    """
+    databse へ接続 #カーソルを取得する場合は baogwcur = dbbaogw.cursor(buffered=True)
+    """
+    try:
+        connect_baogw = mysql.connector.connect(
+            host=COM.MY_HOST,
+            db=COM.MY_DB,
+            user=COM.MY_USER,
+            password=COM.MY_PASSWD
+        )
+    except Exception as msg:
+        LOGGER.critical('Faild to connect the DB, so exit.')
+        LOGGER.info(msg)
+        exit()
+    return connect_baogw
+
+def kisys_maintenance(nowdatetimestr):
+    """
+    gw_rulesテーブルから、customer_name=KISYS のルールを抽出
+    """
+    dbbaogw = connect_db()
+    baogwcur = dbbaogw.cursor(buffered=True)
+    sql = "SELECT * FROM gw_rules WHERE \
+    rule_status=1 and customer_name='KISYS' and start_time<=%s and end_time>=%s \
+    ORDER BY rule_id DESC"
+    sql_values = (nowdatetimestr, nowdatetimestr)
+    try:
+        baogwcur.execute(sql, sql_values)
+        kisys_mainte = baogwcur.fetchall()
+        baogwcur.close()
+        dbbaogw.close()
+    except Exception as msg:
+        LOGGER.critical('Stopped by an unknown error.')
+        LOGGER.info(msg)
+        exit()
+    return kisys_mainte
+
+#def get_gw_rules():
+    """
+    gw_rules から action_no を抜き出す。
+    step1 : customer_name=kisys KISYSメンテナンス中を意味するルール
+    step2 : host_name=＊ and ci_name=* 該当お客様において、無条件適用ルール
+    step3 : host_name=＊or一致 and ci_name=*or一致 *を優先しないソートで抜き出す
+    """
+    #
+    #
+    # return
+
+def get_new_events():
+    """
+    gw_events から新規イベント(event_status=0)を抜き出す
+    """
+    dbbaogw = connect_db()
+    baogwcur = dbbaogw.cursor(buffered=True)
+    sql = "SELECT * FROM gw_events WHERE event_status=0 ORDER BY alarm_time ASC"
+    #sql = "SELECT * FROM gw_events WHERE event_status=0 ORDER BY alarm_time ASC LIMIT 1"
+    try:
+        baogwcur.execute(sql)
+        new_events = baogwcur.fetchall()
+        baogwcur.close()
+        dbbaogw.close()
+    except Exception as msg:
+        LOGGER.critical('Stopped by an unknown error.')
+        LOGGER.info(msg)
+        exit()
+    return new_events
+
+def get_dup_events(alarm_time, customer_name, hostname, ci_name):
+    """
+    重複イベントを抜き出す
+    alarm_time, customer_name, hostname, ci_name 全てが一致し、event_status!=0 のレコードを重複とみなす
+    """
+    dbbaogw = connect_db()
+    baogwcur = dbbaogw.cursor(buffered=True)
+    sql = "SELECT * FROM gw_events \
+    WHERE event_status!=0 and alarm_time=%s and customer_name=%s and hostname=%s and ci_name=%s \
+    ORDER BY event_status DESC"
+    sql_values = (alarm_time, customer_name, hostname, ci_name)
+    try:
+        baogwcur.execute(sql, sql_values)
+        dup_events = baogwcur.fetchall()
+        baogwcur.close()
+        dbbaogw.close()
+    except Exception as msg:
+        LOGGER.critical('Stopped by an unknown error.')
+        LOGGER.info(msg)
+        exit()
+    return dup_events
+
+def get_existing_events(customer_name, hostname, ci_name):
+    """
+    既存のError報を探す
+    customer_name, hostname, ci_name が一致し、event_status=1 のレコード
+    """
+    dbbaogw = connect_db()
+    baogwcur = dbbaogw.cursor(buffered=True)
+    sql = "SELECT gw_event_id,gw_incident_id,alarm_time FROM gw_events \
+    WHERE event_status=1 and customer_name=%s and hostname=%s and ci_name=%s \
+    ORDER BY alarm_time DESC"
+    sql_values = (customer_name, hostname, ci_name)
+    try:
+        baogwcur.execute(sql, sql_values)
+        existing_events = baogwcur.fetchall()
+        if existing_events:
+            gw_incident_id = existing_events[0][1]
+            sql = "SELECT kisys_incidentid FROM gw_incidents \
+            WHERE gw_incident_id=%s \
+            ORDER BY update_time DESC"
+            sql_values = (gw_incident_id,)
+            baogwcur.execute(sql, sql_values)
+            existing_incident = baogwcur.fetchall()[0][0]
+            #kisys_incidentid = existing_incident[0][0]
+        baogwcur.close()
+        dbbaogw.close()
+    except Exception as msg:
+        LOGGER.critical('Stopped by an unknown error.')
+        LOGGER.info(msg)
+        exit()
+    existing_reports = (
+        existing_events[0][0], existing_events[0][1],
+        existing_events[0][2], existing_incident)
+    return existing_reports
+
+def update_gw_events(event_status, gw_incident_id, gw_event_id, update_time):
+    """
+    gw_events テーブルを更新する関数
+    """
+    dbbaogw = connect_db()
+    baogwcur = dbbaogw.cursor(buffered=True)
+    sql = "UPDATE gw_events SET event_status=%s, gw_incident_id=%s, update_time=%s \
+    WHERE gw_event_id=%s"
+    sql_values = (event_status, gw_incident_id, update_time, gw_event_id)
+    try:
+        baogwcur.execute(sql, sql_values)
+        dbbaogw.commit()
+        baogwcur.close()
+        dbbaogw.close()
+    except Exception as msg:
+        LOGGER.critical('Stopped by an unknown error.')
+        LOGGER.info(msg)
+        exit()
+
+def update_gw_incidents(incident_status, update_time, kisys_status, gw_incident_id):
+    """
+    gw_incidents テーブルを更新する
+    """
+    dbbaogw = connect_db()
+    baogwcur = dbbaogw.cursor(buffered=True)
+    sql = "UPDATE gw_incidents SET incident_status=%s, update_time=%s, kisys_status=%s \
+    WHERE gw_incident_id=%s"
+    sql_values = (incident_status, update_time, kisys_status, gw_incident_id)
+    try:
+        baogwcur.execute(sql, sql_values)
+        dbbaogw.commit()
+        baogwcur.close()
+        dbbaogw.close()
+    except Exception as msg:
+        LOGGER.critical('Stopped by an unknown error.')
+        LOGGER.info(msg)
+        exit()
+
+def insert_gw_incidents(insert_values):
+    """
+    gw_incidents テーブルへ新規レコード挿入
+    """
+    dbbaogw = connect_db()
+    baogwcur = dbbaogw.cursor(buffered=True)
+    sql = "insert into gw_incidents (incident_status,update_time,customer_name,hostname,\
+    ci_name,kisys_status,kisys_incidentid) values (%s,%s,%s,%s,%s,%s,%s)"
+    try:
+        baogwcur.execute(sql, insert_values)
+        dbbaogw.commit()
+        sql = "SELECT gw_incident_id FROM gw_incidents WHERE update_time=%s and customer_name=%s \
+        and hostname=%s and ci_name=%s;"
+        sql_values = (insert_values[1], insert_values[2], insert_values[3], insert_values[4])
+        try:
+            baogwcur.execute(sql, sql_values)
+            gw_incident_id = baogwcur.fetchall()[0][0]
+            baogwcur.close()
+            dbbaogw.close()
+        except Exception as msg:
+            LOGGER.critical('Stopped by an unknown error.')
+            LOGGER.info(msg)
+            exit()
+    except Exception as msg:
+        LOGGER.critical('Stopped by an unknown error.')
+        LOGGER.info(msg)
+        exit()
+    return gw_incident_id
+
+def set_baosoap_param(new_event, kisys_incidentid):
+    """
+    BAO へ送信する SOAPパラメータを格納する
+    プロジェクトステップ２にて、action_no による条件分岐も追加予定
+    """
+    try:
+        alarm_unixtime = str(int(new_event[9].timestamp()))
+    except:
+        exception_msg = traceback.format_exc()
+        LOGGER.info(exception_msg)
+    if new_event[12] == COM.GW_ALARM_STATUS_ERROR:
+        LOGGER.debug('error報のBAOSOAPパラメータ処理')
+        value_incidentid = kisys_incidentid
+        value_company = new_event[7]
+        value_lastname = new_event[7]
+        value_summary = COM.SOAP_VALUE_SUMMARY + new_event[8] + new_event[10]
+        value_ci = new_event[8]
+        value_serviceci = COM.SOAP_VALUE_SERVICECI + '(' + new_event[6] + ')'
+        value_occurrence = alarm_unixtime
+        value_restore = ''
+        value_status = COM.SOAP_VALUE_STATUS
+        value_resolution = COM.SOAP_VALUE_RESOLUTION
+        value_internalalarmid = COM.INTERNAL_ID + '%010d' % new_event[0]
+        value_worklog_category = COM.SOAP_VALUE_WORKLOG_CATEGORY_NEW
+        value_worklog_notes = new_event[13]
+        value_worklog_date = alarm_unixtime
+    else:
+        LOGGER.debug('normal報のBAOSOAPパラメータ処理')
+        value_incidentid = kisys_incidentid
+        value_company = new_event[7]
+        value_lastname = new_event[7]
+        value_summary = COM.SOAP_VALUE_SUMMARY + new_event[8] + new_event[10]
+        value_ci = new_event[8]
+        value_serviceci = COM.SOAP_VALUE_SERVICECI + '(' + new_event[6] + ')'
+        value_occurrence = ''
+        value_restore = alarm_unixtime
+        value_status = COM.SOAP_VALUE_STATUS
+        value_resolution = COM.SOAP_VALUE_RESOLUTION_UPDATE
+        value_internalalarmid = COM.INTERNAL_ID + '%010d' % new_event[0]
+        value_worklog_category = COM.SOAP_VALUE_WORKLOG_CATEGORY_UPDATE
+        value_worklog_notes = new_event[13]
+        value_worklog_date = alarm_unixtime
+    baosoap_param = (value_incidentid, value_company, value_lastname,\
+    value_summary, value_ci, value_serviceci, value_occurrence,\
+    value_restore, value_status, value_resolution, value_internalalarmid,\
+    value_worklog_category, value_worklog_notes, value_worklog_date)
+    return baosoap_param
+
+def bao_soap(new_event, kisys_incidentid):
+    """
+    BAOへ送信するシェルスクリプトを呼び出し、結果を返す
+    """
+    try:
+        baosoap_paramtext = COM.GW_DELIMITER.join(set_baosoap_param(new_event, kisys_incidentid))
+        fout = open('/usr/lib/zabbix/alertscripts/baosoap/param.txt', 'wt')
+        fout.write(baosoap_paramtext)
+        fout.close()
+        subprocess.getoutput('/usr/lib/zabbix/alertscripts/itosbaosoap.sh')
+        #os.system('sudo /usr/lib/zabbix/alertscripts/itosbaosoap.sh')
+        LOGGER.debug('itosbaosoap.sh を実行')
+    except Exception as msg:
+        LOGGER.critical('Stopped by an unknown error.')
+        LOGGER.info(msg)
+        exit()
+    wait = 25 # BAOからのレスポンスファイル有無を確認する。0.1 秒刻みで確認し、wait/10 秒待つ
+    split_time = 0
+    while split_time < wait:
+        if os.path.exists('/usr/lib/zabbix/alertscripts/baosoap/res/itosbaosoap_res.xml'):
+            LOGGER.debug('BAOからのresponsファイル発見')
+            bao_res = True
+            break
+        split_time += 1
+        time.sleep(0.1)
+    else:
+        LOGGER.debug('%s/10 秒待ったが、BAOからのresponsファイルが無い', wait)
+        bao_res = False
+    if bao_res:
+        file_opne = open('/usr/lib/zabbix/alertscripts/baosoap/res/itosbaosoap_result', 'rt')
+        response_code = file_opne.read()
+        if 'Failure' in response_code:
+            bao_result = 'Failure'
+        else:
+            bao_result = response_code
+        file_opne.close()
+    else:
+        bao_result = 'No_reply'
+    return bao_result
+
+def event_loop(new_events):
+    """
+    新規イベント(event_status=0)のレコードを抽出して1行ずつ処理する
+    """
+    val = 0
+    len_new_events = len(new_events)
+    for new_event in new_events:
+        val += 1
+        LOGGER.info('イベント処理開始(%s/%s), gw_event_id=%s', val, len_new_events, new_event[0])
+        update_time = dt.now().strftime("%Y-%m-%d %H:%M:%S")
+        gw_event_id = new_event[0]
+        customer_name = new_event[7]
+        hostname = new_event[8]
+        alarm_time = new_event[9]
+        ci_name = new_event[10]
+        alarm_status = new_event[12]
+        gw_incident_id = None #NULLを代入しておく
+        #""" 重複レコードの有無確認 """
+        if get_dup_events(alarm_time, customer_name, hostname, ci_name):
+            LOGGER.info('重複レコードです gw_event_id=%s, event_status=99 にUPDATE', gw_event_id)
+            update_gw_events(COM.GW_EVENT_STATUS_DUP, gw_incident_id, gw_event_id, update_time)
+            LOGGER.info('イベント処理(%s/%s)終了, gw_event_id=%s', val, len_new_events, new_event[0])
+            continue
+        #""" alarm_status が info, sec, syserror or sysnormal の場合の処理 """
+        if alarm_status in (
+                COM.GW_ALARM_STATUS_INFO, COM.GW_ALARM_STATUS_SEC,
+                COM.GW_ALARM_STATUS_SYSERROR, COM.GW_ALARM_STATUS_SYSNORMAL
+            ):
+            LOGGER.info(
+                'alarm_status=%s のためクローズします(gw_event_id=%s, event_status=2)',
+                alarm_status, gw_event_id
+            )
+            update_gw_events(COM.GW_EVENT_STATUS_CLOSE, gw_incident_id, gw_event_id, update_time)
+            LOGGER.info('イベント処理(%s/%s)終了, gw_event_id=%s', val, len_new_events, new_event[0])
+            continue
+        #""" error or normal で分岐 """
+        #if alarm_status is COM.GW_ALARM_STATUS_ERROR:
+        if alarm_status == COM.GW_ALARM_STATUS_ERROR:
+            LOGGER.debug('error報処理開始 gw_event_id=%s', gw_event_id)
+            # """ alarm_status = error の処理 """
+            kisys_incidentid = ''
+            bao_soap_result = bao_soap(new_event, kisys_incidentid)
+            if bao_soap_result == 'No_reply':
+                kisys_status = COM.GW_KISYS_STATUS_NEW_NORES
+                kisys_incidentid = None
+                LOGGER.debug('error報処理:BAO無応答 gw_event_id=%s', gw_event_id)
+            elif bao_soap_result == 'Failure':
+                kisys_status = COM.GW_KISYS_STATUS_NEW_NG
+                kisys_incidentid = None
+                LOGGER.debug('error報処理:BAO連携失敗 gw_event_id=%s', gw_event_id)
+            else:
+                kisys_status = COM.GW_KISYS_STATUS_NEW_OK
+                kisys_incidentid = bao_soap_result
+                LOGGER.debug('error報処理:BAO連携成功 gw_event_id=%s', gw_event_id)
+            insert_values = (
+                COM.GW_INCIDENT_STATUS_ACTIVE,
+                update_time,
+                customer_name,
+                hostname,
+                ci_name,
+                kisys_status,
+                kisys_incidentid
+            )
+            try:
+                gw_incident_id = insert_gw_incidents(insert_values)
+                update_gw_events(
+                    COM.GW_EVENT_STATUS_ACTIVE, gw_incident_id, gw_event_id, update_time
+                    )
+                LOGGER.info(
+                    'error報処理:関連テーブルをActiveに更新しました。gw_event_id=%s, gw_incident_id=%s, kisys_incidentid=%s',
+                    gw_event_id, gw_incident_id, kisys_incidentid
+                    )
+            except Exception as msg:
+                LOGGER.info(
+                    'error報処理:関連テーブル更新失敗。gw_event_id=%s, gw_incident_id=%s, kisys_incidentid=%s',
+                    gw_event_id, gw_incident_id, kisys_incidentid
+                    )
+                exit()
+                LOGGER.debug(msg)
+        else:
+            #""" alarm_status = normal の処理 """ まず既存の error 報を探す
+            LOGGER.debug('normal報処理開始 gw_event_id=%s', gw_event_id)
+            existing_reports = get_existing_events(customer_name, hostname, ci_name)
+            if existing_reports == []:
+                # error 報の無い normal 報と判断し、関連イベントをクローズする
+                LOGGER.critical('normal報処理:error報が見つかりません。 gw_event_id=%s', gw_event_id)
+                update_gw_events(
+                    COM.GW_EVENT_STATUS_CLOSE, gw_incident_id, gw_event_id, update_time
+                )
+                LOGGER.info('gw_event_id=%s クローズしました(event_status=2)', gw_event_id)
+            gw_incident_id = existing_reports[1]
+            # existing_alarm_time = existing_reports[2] # 5分以内の復旧報はキャンセル扱い
+            kisys_incidentid = existing_reports[3]
+            LOGGER.debug(
+                'normal報処理:関連erro報取得成功 gw_event_id=%s, gw_incident_id=%s, kisys_incidentid=%s',
+                gw_event_id, gw_incident_id, kisys_incidentid
+                )
+            #bao_soap_result = bao_soap(new_event, kisys_incidentid)
+            bao_soap_result = 'BAOGWPJ-Step1'
+            if bao_soap_result == 'No_reply':
+                kisys_status = COM.GW_KISYS_STATUS_UPDATE_NORES
+                LOGGER.debug(
+                    'normal報処理:BAO無応答 gw_event_id=%s, gw_incident_id=%s, kisys_incidentid=%s',
+                    gw_event_id, gw_incident_id, kisys_incidentid
+                    )
+            elif bao_soap_result == 'Failure':
+                kisys_status = COM.GW_KISYS_STATUS_UPDATE_NG
+                LOGGER.debug(
+                    'normal報処理:BAO更新失敗 gw_event_id=%s, gw_incident_id=%s, kisys_incidentid=%s',
+                    gw_event_id, gw_incident_id, kisys_incidentid
+                    )
+            elif bao_soap_result == 'BAOGWPJ-Step1':
+                #kisys_status = bao_soap_result + 'のため更新しません'
+                kisys_status = 'concat(kisys_status, '')'
+                LOGGER.debug(
+                    'normal報処理:BAO更新-未実施 gw_event_id=%s, gw_incident_id=%s, kisys_incidentid=%s',
+                    gw_event_id, gw_incident_id, kisys_incidentid
+                    )
+            else:
+                kisys_status = COM.GW_KISYS_STATUS_UPDATE_OK
+                LOGGER.debug(
+                    'normal報処理:BAO更新成功 gw_event_id=%s, gw_incident_id=%s, kisys_incidentid=%s',
+                    gw_event_id, gw_incident_id, kisys_incidentid
+                    )
+            try:
+                update_gw_incidents(
+                    COM.GW_INCIDENT_STATUS_CLOSE, update_time, kisys_status, gw_incident_id
+                )
+                update_gw_events(
+                    COM.GW_EVENT_STATUS_CLOSE, gw_incident_id, gw_event_id, update_time
+                )
+                LOGGER.info(
+                    'normal報処理:関連テーブルをcloseに更新しました。 gw_event_id=%s, gw_incident_id=%s, kisys_incidentid=%s',
+                    gw_event_id, gw_incident_id, kisys_incidentid
+                    )
+            except Exception as msg:
+                LOGGER.critical(msg)
+                LOGGER.info(
+                    'normal報処理:関連テーブル更新失敗 gw_event_id=%s, gw_incident_id=%s, kisys_incidentid=%s',
+                    gw_event_id, gw_incident_id, kisys_incidentid
+                    )
+                exit()
+        LOGGER.info('イベント処理(%s/%s)終了, gw_event_id=%s', val, len_new_events, new_event[0])
+
+def main():
+    """
+    メイン処理
+    """
+    while 1:
+        #""" 無限ループ開始 """
+        LOGGER.debug('無限ループ先頭')
+        nowdatetime = dt.now()
+        nowdatetimestr = nowdatetime.strftime("%Y-%m-%d %H:%M:%S")
+        if file_check('primary') is not True:
+            LOGGER.info('動作フラグファイルPriymaryが見つかりません。10秒後、無限ループ先頭に戻ります。')
+            time.sleep(10)
+            continue
+
+        #""" K-ISYSメンテナンスルール確認関数の呼び出し """
+        kisys_mainte = kisys_maintenance(nowdatetimestr)
+        if kisys_mainte:
+            rule_id = kisys_mainte[0][0]
+            LOGGER.info('KISYSメンテナンス期間に該当(rule_id = %s)。10秒後、無限ループ先頭に戻ります。', rule_id)
+            time.sleep(10)
+            continue
+        else:
+            LOGGER.info('KISYSメンテナンス期間に該当しないため処理を継続します。')
+
+        #""" イベント処理関数の呼び出し """
+        new_events = get_new_events()
+        if new_events:
+            event_loop(new_events)
+        else:
+            LOGGER.info('処理対象イベント無し。10秒後、無限ループ先頭に戻ります。')
+            #time.sleep(10)
+            #continue
+
+        # 無限ループ最後尾、DB切断、10秒後、無限ループ先頭に戻る。
+        LOGGER.debug('無限ループ最後尾 10秒後に先頭に戻ります。')
+        time.sleep(10)
+
+if __name__ == '__main__':
+    # 起動済みプロセスの確認、ファイルがロックできなければ、起動済みプロセスがいると判断
+    LOCK_RESULT = lock_file(__file__)
+    LOGGER.debug(LOCK_RESULT)
+    try:
+        main()
+    except Exception as msg:
+        LOGGER.critical('Stopped by an unknown error.')
+        #LOGGER.exception(msg)
+        EXCEPTIONS_MSG = traceback.format_exc()
+        LOGGER.info(EXCEPTIONS_MSG)

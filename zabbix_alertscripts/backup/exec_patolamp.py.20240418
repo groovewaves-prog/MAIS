@@ -1,0 +1,214 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+## 概要 ##
+exec_patolamp.py
+patolampファイルを監視し、存在したらrshでpatolampを鳴動させる。
+"""
+
+## 共通 ########################## 別途、共通設定ファイルへ
+
+## import ##
+import traceback
+#from datetime import datetime as dt
+import os
+import sys
+import fcntl
+import time
+import logging
+import logging.handlers
+import subprocess
+import gwcommon as COM
+
+##################################
+
+## スクリプトのパス、ファイル名を取得
+# __file__ = '/usr/lib/zabbix/alertscripts/exec_patolamp.py'
+SCRIPT_FILE = os.path.basename(__file__)
+
+""" log出力設定 ※rsyslogd に渡す設定 """
+LOGGER = logging.getLogger(SCRIPT_FILE)
+LOGGER.setLevel(COM.LOGGER_LEVEL_EXEC_PATOLAMP) # 出力レベルの設定
+HANDLER = logging.handlers.SysLogHandler(address=('localhost', 514), facility='local6') # 出力先の設定
+FORMATTER = logging.Formatter('%(name)s[%(process)d]: %(levelname)s: [%(lineno)d]%(message)s')
+HANDLER.formatter = FORMATTER
+LOGGER.addHandler(HANDLER)
+
+def lock_file(locktarget):
+    """
+    ファイルロックを試み、ロックできなければ終了
+    """
+    lock_file_name = '%s.lock' % (locktarget)
+    fp_lock = open(lock_file_name, 'w')
+    try:
+        fcntl.flock(fp_lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except OSError as msg:
+        LOGGER.info(msg)
+        LOGGER.info('Another process is running, so exit.')
+        sys.exit()
+    return fp_lock
+
+def file_check(filename):
+    """
+    動作フラグファイル(/var/lib/baogw/ 配下) の有無をチェック
+    """
+    check_file = '/var/lib/baogw/' + filename
+    return os.path.exists(check_file)
+
+def file_delete(filename):
+    """
+    動作フラグファイル(/var/lib/baogw/ 配下) のファイルを削除
+    """
+    delete_file = '/var/lib/baogw/' + filename
+    try:
+        os.remove(delete_file)
+        LOGGER.info('パトランプフラグ(%s)を削除しました。', delete_file)
+    except Exception as msg:
+        LOGGER.error('パトランプフラグ(%s)の削除に失敗しました。', delete_file)
+        LOGGER.info('%s', msg)
+    return
+
+def patolamp_on(patolamp_kind, patolamp_pattern):
+    """
+    指定パターンでパトランプを鳴動。
+    """
+    # パトランプ鳴動
+    try:
+        command = ['/usr/bin/rsh', '%s' % COM.PATLAMP_IP, '-l', '%s' % COM.PATLAMP_USER,\
+         'ACOP', '%s' % patolamp_pattern]
+        subprocess.check_call(command)
+        LOGGER.info('%sパトランプ鳴動成功!', patolamp_kind)
+        return True
+    except Exception as msg:
+        LOGGER.error('%sパトランプ鳴動失敗!!', patolamp_kind)
+        LOGGER.info('%s', msg)
+        return False
+
+def patolamp_on_ip(patolamp_kind, patolamp_pattern, patolamp_ip):
+    """
+    指定IPと指定パターンでパトランプを鳴動。
+    """
+    # パトランプ鳴動
+    
+    # ハウコム運用顧客の確認
+    if patolamp_ip == COM.HOWCOM_PATLAMP_IP:
+        try:
+            if file_check(COM.HOWCOM_OLD) is True:
+                command = ['/usr/bin/rsh', '%s' % patolamp_ip, '-l', '%s' % COM.PATLAMP_USER,\
+                 'ACOP', '%s' % patolamp_pattern]
+                subprocess.check_call(command)
+                LOGGER.info('%sハウコム旧拠点パトランプ鳴動成功!', patolamp_kind)
+        except Exception as msg:
+            LOGGER.error('%sハウコム旧拠点パトランプ鳴動失敗!!', patolamp_kind)
+            LOGGER.info('%s', msg)
+
+        try:
+            if file_check(COM.KDDI_MIYAZAKI) is True:
+                command = ['/usr/bin/rsh', '%s' % COM.KDDI_MIYAZAKI_PATLAMP_IP, '-l', '%s' % COM.PATLAMP_USER,\
+                 'ACOP', '%s' % patolamp_pattern]
+                subprocess.check_call(command)
+                LOGGER.info('%s宮崎ヘルプパトランプ鳴動成功!', patolamp_kind)
+                return
+            elif file_check(COM.HOWCOM_OLD) is False:
+                LOGGER.error('新拠点、旧拠点両方のフラグファイルが存在していません')
+                return
+        except Exception as msg:
+            LOGGER.error('%s宮崎ヘルプパトランプ鳴動失敗!!', patolamp_kind)
+            LOGGER.info('%s', msg)
+            return
+
+    else:
+        try:
+            command = ['/usr/bin/rsh', '%s' % patolamp_ip, '-l', '%s' % COM.PATLAMP_USER,\
+             'ACOP', '%s' % patolamp_pattern]
+            subprocess.check_call(command)
+            LOGGER.info('%sパトランプ鳴動成功!', patolamp_kind)
+            return
+        except Exception as msg:
+            LOGGER.error('%sパトランプ鳴動失敗!!', patolamp_kind)
+            LOGGER.info('%s', msg)
+            return
+
+def patolamp_on_other(identifier, patolamp_ip, red_pattern, yellow_pattern, green_pattern):
+    """
+    動作フラグファイル(/var/lib/baogw/*_identifier) の有無をチェックし、パトランプを鳴動。
+    """
+     #red ファイル確認
+    if file_check(COM.RED_PATOLAMP_FILE + '_' + identifier) is True:
+        # パトランプフラグ削除
+        file_delete(COM.RED_PATOLAMP_FILE + '_' + identifier)
+        if file_check(COM.YELLOW_PATOLAMP_FILE + '_' + identifier) is True:
+            file_delete(COM.YELLOW_PATOLAMP_FILE + '_' + identifier)
+        if file_check(COM.GREEN_PATOLAMP_FILE + '_' + identifier) is True:
+            file_delete(COM.GREEN_PATOLAMP_FILE + '_' + identifier)
+        # パトランプ鳴動
+        patolamp_kind = 'Red'
+        patolamp_on_ip(patolamp_kind, red_pattern, patolamp_ip)
+    elif file_check(COM.YELLOW_PATOLAMP_FILE + '_' + identifier) is True:
+        # パトランプフラグ削除
+        file_delete(COM.YELLOW_PATOLAMP_FILE + '_' + identifier)
+        if file_check(COM.GREEN_PATOLAMP_FILE + '_' + identifier) is True:
+            file_delete(COM.GREEN_PATOLAMP_FILE + '_' + identifier)
+        # パトランプ鳴動
+        patolamp_kind = 'Yellow'
+        patolamp_on_ip(patolamp_kind, yellow_pattern, patolamp_ip)
+    elif file_check(COM.GREEN_PATOLAMP_FILE + '_' + identifier) is True:
+        file_delete(COM.GREEN_PATOLAMP_FILE + '_' + identifier)
+        # パトランプ鳴動
+        patolamp_kind = 'Green'
+        patolamp_on_ip(patolamp_kind, green_pattern, patolamp_ip)
+
+def main():
+    """
+    メイン処理
+    """
+    while 1:
+        # 共通パラメータ読み込み
+        #import gwcommon as COM
+        #""" 無限ループ開始 """
+        LOGGER.debug('無限ループ先頭')
+         #red ファイル確認
+        if file_check(COM.RED_PATOLAMP_FILE) is True:
+            # パトランプフラグ削除
+            file_delete(COM.RED_PATOLAMP_FILE)
+            if file_check(COM.YELLOW_PATOLAMP_FILE) is True:
+                file_delete(COM.YELLOW_PATOLAMP_FILE)
+            if file_check(COM.GREEN_PATOLAMP_FILE) is True:
+                file_delete(COM.GREEN_PATOLAMP_FILE)
+            # パトランプ鳴動
+            patolamp_kind = 'Red'
+            patolamp_on(patolamp_kind, COM.RED_PATOLAMP_PATTERN)
+        elif file_check(COM.YELLOW_PATOLAMP_FILE) is True:
+            # パトランプフラグ削除
+            file_delete(COM.YELLOW_PATOLAMP_FILE)
+            if file_check(COM.GREEN_PATOLAMP_FILE) is True:
+                file_delete(COM.GREEN_PATOLAMP_FILE)
+            # パトランプ鳴動
+            patolamp_kind = 'Yellow'
+            patolamp_on(patolamp_kind, COM.YELLOW_PATOLAMP_PATTERN)
+        elif file_check(COM.GREEN_PATOLAMP_FILE) is True:
+            file_delete(COM.GREEN_PATOLAMP_FILE)
+            # パトランプ鳴動
+            patolamp_kind = 'Green'
+            patolamp_on(patolamp_kind, COM.GREEN_PATOLAMP_PATTERN)
+        # 新宿12階パトランプ鳴動
+        patolamp_on_other(COM.FLOOR_12TH, COM.FLOOR_12TH_PATLAMP_IP, COM.RED_PATOLAMP_PATTERN_FLOOR_12TH, COM.YELLOW_PATOLAMP_PATTERN_FLOOR_12TH, COM.GREEN_PATOLAMP_PATTERN_FLOOR_12TH)
+        # ハウコム専用パトランプ鳴動
+        patolamp_on_other(COM.HOWCOM, COM.HOWCOM_PATLAMP_IP, COM.RED_PATOLAMP_PATTERN_HOWCOM, COM.YELLOW_PATOLAMP_PATTERN_HOWCOM, COM.GREEN_PATOLAMP_PATTERN_HOWCOM)
+        # VIP専用パトランプ鳴動
+        patolamp_on_other(COM.VIP, COM.VIP_PATLAMP_IP, COM.RED_PATOLAMP_PATTERN_VIP, COM.YELLOW_PATOLAMP_PATTERN_VIP, COM.GREEN_PATOLAMP_PATTERN_VIP)
+        # インターバル
+        time.sleep(COM.PATO_INTERVAL)
+
+if __name__ == '__main__':
+    # 起動済みプロセスの確認、ファイルがロックできなければ、起動済みプロセスがいると判断
+    LOCK_RESULT = lock_file(__file__)
+    LOGGER.debug(LOCK_RESULT)
+    try:
+        main()
+    except Exception as msg:
+        LOGGER.critical('Stopped by an unknown error.')
+        #LOGGER.exception(msg)
+        EXCEPTIONS_MSG = traceback.format_exc()
+        LOGGER.info(EXCEPTIONS_MSG)

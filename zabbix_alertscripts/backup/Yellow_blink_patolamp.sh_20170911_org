@@ -1,0 +1,72 @@
+#!/bin/sh
+#------------------------------------------------------------------------------
+# drive BAO-GW system patlamp in Shinjuku-OC by zabbix server and 
+# gw-scripts.
+# usage: Yellow_blink_patolamp.sh <dummy> <switch> <logmsg>
+#  dummy: any string (zabbix set as Send-To)
+#  switch: 0:obey 'primary' flag. 1:ignore 'primary' flag
+#  logmsg: target information for logging. (event-id, hostname, trigger-name) 
+# response: 0(always normal)
+#------------------------------------------------------------------------------
+
+#---- define constants ----
+PATLAMP_IP=10.128.1.10
+PATLAMP_USER=root
+PATLAMP_CMD='ACOP 03000000'
+PRIMARY_FLG=/var/lib/baogw/primary
+
+#---- define variables ----
+PGNAME=`basename $0 .sh`
+#PROCESS_ID=$$
+
+#---- define functions ----
+function putlog_w() {
+  logger -i -p local6.warn "WARN: ${PGNAME} ($1) ${LOGMSG}"
+}
+
+function putlog_i() {
+  logger -i -p local6.info "INFO: ${PGNAME} ($1) ${LOGMSG}"
+}
+
+#---- check number of arguments ----
+if [ $# -lt 3 ]; then
+  # few arguments
+  putlog_w "failed. too few arguments."
+  exit 0
+fi
+
+#---- get arguments ----
+SWITCH=$2
+LOGMSG=$3
+
+#---- check arguments ----
+if ! [ ${SWITCH} = "0" -o ${SWITCH} = "1" ]; then
+  putlog_w "failed. invalid switch."
+  exit 0
+fi
+ 
+#---- start ----
+putlog_i "started."
+
+#---- check if drive patlamp ----
+if [ ${SWITCH} = "1" -o -f ${PRIMARY_FLG} ]; then
+  # do
+  #echo /usr/bin/rsh ${PATLAMP_IP} -l ${PATLAMP_USER} ${PATLAMP_CMD}
+  /usr/bin/rsh ${PATLAMP_IP} -l ${PATLAMP_USER} ${PATLAMP_CMD}
+  # check exit code
+  if [ $? -ne 0 ]; then
+    putlog_w "failed. RSH exited code $?."
+    exit 0
+  else
+    putlog_i "normal ended."
+    exit 0
+  fi
+else
+  # quit
+  putlog_i "quit. because of secondary."
+  exit 0
+fi
+
+#EOF
+
+

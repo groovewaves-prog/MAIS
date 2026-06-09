@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soa="http://bmc.com/ao/xsd/2008/09/soa" xmlns:soap="soap">
+        <soapenv:Header>
+                <wsse:Security soap:mustUnderstand="1" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+                        <wsse:UsernameToken wsu:Id="UsernameToken-1">
+                                <wsse:Username>soapuser</wsse:Username>
+                                <wsse:Password Type="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText">soapuser123</wsse:Password>
+                        </wsse:UsernameToken>
+                </wsse:Security>
+        </soapenv:Header>
+        <soapenv:Body>
+                <soa:executeProcess>
+                        <soa:gridName>GRID1</soa:gridName>
+                        <soa:processName>:BAO031_Integrated_Incident_Create:Integrated_Incident_Create_Main</soa:processName>
+                        <soa:parameters>
+                               <!--Optional:-->
+                                <soa:Input>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_system</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_system#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_contactmail</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_contactmail#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_contacttel</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_contacttel#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_submit_mode</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_submit_mode#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_GID_ID</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_GID_ID#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_company</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_company#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_incidentid</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_incidentid#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_lastname</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_lastname#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_firstname</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_firstname#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_middlename</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_middlename#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_summary</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_summary#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_serviceci</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_serviceci#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_ci</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_ci#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_supportgroup</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_supportgroup#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_assignee</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_assignee#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_occurrence</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_occurrence#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_restore</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_restore#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_status</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_status#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_resolution</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_resolution#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_internalalarmid</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_internalalarmid#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_worklog_mode</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>1</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_worklog_GID_ID</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_worklog_GID_ID#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_worklog_category</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_worklog_category#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_worklog_template</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_worklog_template#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_worklog_summary</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_worklog_summary#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_worklog_notes</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_worklog_notes#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_worklog_assigned_group</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_worklog_assigned_group#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_worklog_operator</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_worklog_operator#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                        <soa:Parameter>
+                                                <soa:Name required="false">value_worklog_date</soa:Name>
+                                                <soa:Value soa:type="string">
+                                                        <soa:Text>#value_worklog_date#</soa:Text>
+                                                </soa:Value>
+                                        </soa:Parameter>
+                                </soa:Input>
+                                <!--Optional:-->
+                                <soa:Output>
+                                <!--Zero or more repetitions:-->
+                                        <soa:Parameter>
+                                                <soa:Name required="false">response</soa:Name>
+                                                <soa:Value/>
+                                        </soa:Parameter>
+                                </soa:Output>
+                        </soa:parameters>
+                </soa:executeProcess>
+        </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,185 @@
+#!/usr/bin/env python3.10
+# -*- coding: utf-8 -*-
+
+"""
+## 概要 ##
+DB_housekeeping.py
+保存期間以上のデータを削除する。
+
+2017/09/25 初版作成 by H.OOZERA
+"""
+
+## 共通 ########################## 別途、共通設定ファイルへ
+
+## import ##
+import datetime
+import os
+#import fcntl
+#import time
+import logging
+import logging.handlers
+#import subprocess
+import mysql.connector
+import gwcommon as COM
+
+##################################
+
+## スクリプトのパス、ファイル名を取得
+# __file__ = '/usr/lib/zabbix/alertscripts/db_housekeeping.py'
+SCRIPT_FILE = os.path.basename(__file__)
+
+""" log出力設定 ※rsyslogd に渡す設定 """
+LOGGER = logging.getLogger(SCRIPT_FILE)
+LOGGER.setLevel(COM.LOGGER_LEVEL_DB_HOUSEKEEPING) # 出力レベルの設定
+HANDLER = logging.handlers.SysLogHandler(address=('localhost', 514), facility='local6') # 出力先の設定
+FORMATTER = logging.Formatter('%(name)s[%(process)d]: %(levelname)s: [%(lineno)d]%(message)s')
+HANDLER.formatter = FORMATTER
+LOGGER.addHandler(HANDLER)
+
+def file_check(filename):
+    """
+    動作フラグファイル(/var/lib/baogw/ 配下) の有無をチェック
+    """
+    check_file = '/var/lib/baogw/' + filename
+    return os.path.exists(check_file)
+
+def connect_db():
+    """
+    databse へ接続
+    """
+    try:
+        dbbaogw = mysql.connector.connect(
+            host=COM.MY_HOST,
+            db=COM.MY_DB,
+            user=COM.MY_USER,
+            password=COM.MY_PASSWD
+        )
+        baogwcur = dbbaogw.cursor(dictionary=True) # カーソル
+    except Exception as msg:
+        LOGGER.error('Faild to connect the DB, so exit.')
+        LOGGER.info(msg)
+        exit()
+    return dbbaogw, baogwcur
+
+
+def get_delete_time():
+    """
+    delete_time用関数　結果をdelete_timeにて返信
+    """
+    retention_period = COM.GW_RETENTION_PERIOD
+    delete_time_t = datetime.datetime.now() - datetime.timedelta(days=retention_period)
+    target_day = delete_time_t.strftime('%Y-%m-%d')
+    delete_time = '%s 00:00:00' % target_day
+    return delete_time
+
+def delete_gw_table(dbbaogw, baogwcur, table_name, delete_time, delete_rec):
+    """
+    delete用関数　結果をdelete_resultにて返信
+    """
+    if table_name == 'gw_events':
+        condition = "update_time < '%s' and (event_status=%s or event_status=%s)"\
+          % (delete_time, COM.GW_EVENT_STATUS_CLOSE, COM.GW_EVENT_STATUS_DUP)
+    elif table_name == 'gw_incidents':
+        condition = "update_time < '%s' and incident_status=%s"\
+         % (delete_time, COM.GW_INCIDENT_STATUS_CLOSE)
+
+    sql = 'DELETE FROM %s WHERE %s' % (table_name, condition)
+    #print(sql)
+    try:
+        baogwcur.execute(sql)
+        LOGGER.info('%s件 delete成功:[%s] 対象テーブル:%s 削除基準日時:%s', delete_rec['COUNT(*)'],\
+        COM.MY_HOST, table_name, delete_time)
+        #コミット
+        dbbaogw.commit()
+        return True
+    except mysql.connector.errors.IntegrityError as msg:
+        LOGGER.error('delete失敗:[%s] 対象テーブル:%s 削除条件:%s', COM.MY_HOST, table_name,\
+         condition)
+        LOGGER.info('%s', msg)
+        return False
+
+def count_delete_data(baogwcur, table_name, delete_time):
+    """
+    delete対象チェック用関数　sqlの結果(sql_exec_result)、件数(delete_rec)を返信
+    """
+    if table_name == 'gw_events':
+        condition = "update_time < '%s' and (event_status=%s or event_status=%s)"\
+         % (delete_time, COM.GW_EVENT_STATUS_CLOSE, COM.GW_EVENT_STATUS_DUP)
+    elif table_name == 'gw_incidents':
+        condition = "update_time < '%s' and incident_status=%s"\
+         % (delete_time, COM.GW_INCIDENT_STATUS_CLOSE)
+
+    sql = 'SELECT COUNT(*) FROM %s WHERE %s' % (table_name, condition)
+    #print(sql)
+    try:
+        baogwcur.execute(sql)
+        delete_rec = baogwcur.fetchone()
+        LOGGER.info('count処理成功:[%s] 対象テーブル:%s 対象件数：%s', COM.MY_HOST,\
+         table_name, delete_rec['COUNT(*)'])
+        sql_exec_result = 'ok'
+        return sql_exec_result, delete_rec
+
+    except mysql.connector.errors.IntegrityError as msg:
+        LOGGER.error('count処理失敗:[%s] 対象テーブル:%s count条件:%s', COM.MY_HOST,\
+         table_name, condition)
+        LOGGER.info('%s', msg)
+        sql_exec_result = 'ng'
+        return  sql_exec_result, delete_rec
+
+def main():
+    """
+    スクリプト本体
+    """
+    # 接続するDBのhostを定義
+    #local_host = COM.MY_HOST
+
+    # データベース（baogw）への接続情報
+    dbbaogw, baogwcur = connect_db()
+
+    # Primaryファイルの有無を確認
+    if file_check('primary') is True:
+        LOGGER.info('マスターモードのため、DB_HouseKeeping処理を開始します。')
+        # 削除日時を取得
+        delete_time = get_delete_time()
+        # gw_events削除データの有無確認
+        table_name = 'gw_events'
+        sql_exec_result, delete_rec = count_delete_data(baogwcur, table_name, delete_time)
+        if sql_exec_result == 'ok':
+            if delete_rec['COUNT(*)'] == 0:
+                # 処理対象無し
+                LOGGER.info('削除対象が見つからなかったため、%sのデータ削除をスキップします。', table_name)
+            else:
+                LOGGER.info('削除対象が見つかったため、%sデータを削除します。', table_name)
+                # gw_eventsデータ削除
+                delete_gw_table(dbbaogw, baogwcur, table_name, delete_time, delete_rec)
+
+        # gw_incidents削除データの有無確認
+        table_name = 'gw_incidents'
+        sql_exec_result, delete_rec = count_delete_data(baogwcur, table_name, delete_time)
+        if sql_exec_result == 'ok':
+            if delete_rec['COUNT(*)'] == 0:
+                # 処理対象無し
+                LOGGER.info('削除対象が見つからなかったため、%sのデータ削除をスキップします。', table_name)
+            else:
+                LOGGER.info('削除対象が見つかったため、%sデータを削除します。', table_name)
+                # gw_eventsデータ削除
+                delete_gw_table(dbbaogw, baogwcur, table_name, delete_time, delete_rec)
+
+        LOGGER.info('DB_HouseKeeping処理を終了します。')
+
+    else:
+        LOGGER.info('スレーブモードのため処理をスキップします。')
+
+    # データベース（baogw）のクローズ情報
+    baogwcur.close()
+    dbbaogw.close()
+
+if __name__ == '__main__':
+    try:
+        main()
+        print("ok")
+    except Exception as msg:
+        LOGGER.error('[End0] Stopped by an unknown error.')
+        ##       LOGGER.exception(msg)
+        LOGGER.info('%s', msg)
+        print("ng")
