@@ -1,0 +1,178 @@
+#!/usr/bin/python3
+#------------------------------------------------------------------------
+# GW-Server Event Data Operation Check Program (ver.1.0)
+# this checks duplicated events exist in event table.
+# this is called by Zabbix and is executed as external
+# monitoring program.
+#
+# Usage: check_dup_event.py <start> <end> <server>
+#  argument:
+#   start :start range (seconds)
+#   end   :end range (seconds)
+#   server:1(gw01 server),2(gw02 server)
+#   e.g. "120 60" means seaching between 2 minutes ago and 1 minute ago.
+#  oupput:
+#   '0 <message>' :OK. all events have pair.
+#   '1 <message>' :NG. no pair or multi pair event found.
+#   '99 <message> :other error.
+#  exit code:
+#   always 0
+#
+# Author: K.Ohshiba
+#------------------------------------------------------------------------
+# Modified
+# 2017/07/29 1st version. K.Ohshiba
+
+# --- import libraries ---
+#import MySQLdb
+import mysql.connector
+import sys, time, syslog
+from datetime import datetime as DT
+from datetime import timedelta
+
+# --- import local modules ---
+import gwcommon
+
+# --- syslog setting ---
+syslog.openlog(logoption=syslog.LOG_PID, facility=syslog.LOG_USER)
+
+# --- define valiables ---
+
+# --- define functions ---
+# print usage
+def usage():
+    print('''usage: %s <start> <end> <server>
+ start : start range (seconds)
+ end   : end range (seconds)
+ server: 1(gw01), 2(gw02)''' % (sys.argv[0].split('/')[-1]))
+
+# send result to zabbix and eyslog
+def sendSyslog(severity, message):
+	syslog.syslog('[gwscript] %s: %s' % (severity, message))
+	
+# do DB operation
+def execDbOperation(conn, cursor, statement):
+	try:
+		cursor.execute(statement)
+		dbres = cursor.fetchall()
+	except:
+		syslog.syslog('[gwscript] CRITICAL: %s' % sys.exc_info()[0])
+		print("99 DB operation error.")
+		raise
+	return dbres
+
+# search target events
+def searchEventsInRange(conn, cursor, sttime, edtime, serverid, expstat):
+	stmstr = sttime.strftime('%Y-%m-%d %H:%M:%S')
+	etmstr = edtime.strftime('%Y-%m-%d %H:%M:%S')
+	sqlval = (serverid, expstat, stmstr, etmstr)
+	statement = "SELECT gw_eventid,customer_name,host_name,alarm_time,ci_name FROM gw_events WHERE detected_host = '%s' AND alarm_status != '%s' AND detected_time BETWEEN '%s' AND '%s'" % sqlval
+	myevts = execDbOperation(conn, cursor, statement)
+	return myevts
+
+# search pair events
+def searchPairEvents(conn, cursor, evt):
+	sqlval = (evt[0], evt[1], evt[2], evt[3], evt[4])
+	statement = "SELECT gw_eventid FROM gw_events WHERE gw_eventid!='%s' AND customer_name='%s' AND host_name='%s' AND alarm_time='%s' AND ci_name='%s'" % sqlval
+	pairevts = execDbOperation(conn, cursor, statement)
+	return pairevts
+
+# --- check args ---
+if len(sys.argv) < 4:
+	usage() 
+	exit()  
+
+# --- get arguments ---
+try:
+	sttrange = int(sys.argv[1])
+	endrange = int(sys.argv[2])
+	server = int(sys.argv[3])
+except ValueError:
+	print("99 could not convert argument to an integer.")
+	exit()
+
+if sttrange <= endrange:
+	print("99 start range must be greater than end range.")
+	exit()
+
+# --- connect to db ---
+try:
+	#conn = MySQLdb.connect(host=gwcommon.MY_HOST, user=gwcommon.MY_USER, passwd=gwcommon.MY_PASSWD, db=gwcommon.MY_DB, charset=gwcommon.MY_CHRSET)
+	conn = mysql.connector.connect(host=gwcommon.MY_HOST, user=gwcommon.MY_USER, passwd=gwcommon.MY_PASSWD, db=gwcommon.MY_DB, charset=gwcommon.MY_CHRSET)
+	cursor = conn.cursor()
+except:
+	print("99 db connect initiation error.")
+	exit()
+
+# --- make search range time ---
+tm = DT.now()
+sttime = tm - timedelta(seconds=sttrange)
+edtime = tm - timedelta(seconds=endrange)
+
+# --- get server id ---
+if 1 == server:
+	# this server
+	serverid = gwcommon.DETECTED_HOST01
+else:
+	# another server
+	serverid = gwcommon.DETECTED_HOST02
+
+# --- except condition ---
+expstat = gwcommon.GW_ALARM_STATUS_SYSERROR
+
+# --- search events created by this server ---
+myevts = searchEventsInRange(conn, cursor, sttime, edtime, serverid, expstat)
+
+# --- search a pair event created by pair server ---
+okcnt = 0
+ngcnt = 0
+result = ""
+for evt in myevts:
+	myevtid = evt[0]
+	# search a pair event
+	pairevts = searchPairEvents(conn, cursor, evt)
+	pairnum = len(pairevts)
+	if 1 == pairnum:
+		# pair event found.
+		sendSyslog(gwcommon.LOG_INFO, "pair events found. %s : %s" % (myevtid, pairevts[0][0]))
+		okcnt += 1
+		continue
+	elif 0 == pairnum:
+		# pair event not found.
+		sendSyslog(gwcommon.LOG_ERR, "pair events NOT found. %s : none" % (myevtid))
+		ngcnt += 1
+		continue
+	else:
+		# unexpected
+		sendSyslog(gwcommon.LOG_ERR, "unexpected multi pair events found. %s : %d events" % (myevtid, pairnum))
+		ngcnt += 1
+		continue
+
+# --- result evaluation ---
+if 0 < ngcnt:
+	# NG. no pair or multi pair event found.
+	sendSyslog(gwcommon.LOG_ERR, "%d no pair or multi pair events found." % ngcnt)
+	result = "1 no pair or multi pair event found."
+elif 0 == okcnt:
+	# OK: no events
+	sendSyslog(gwcommon.LOG_INFO, "no events found.")
+	result = "0 no events found."
+elif 0 < okcnt:
+	# OK: all events have pair events
+	sendSyslog(gwcommon.LOG_INFO, "%d pair events found." % okcnt)
+	result = "0 all pair events exists."
+
+# --- return result to zabbix
+print(result)
+
+# --- end operation ---
+cursor.close()
+conn.close()
+
+syslog.closelog()
+
+exit()
+
+# EOF
+
+

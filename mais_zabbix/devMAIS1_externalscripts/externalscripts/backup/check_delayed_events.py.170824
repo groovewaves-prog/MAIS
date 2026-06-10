@@ -1,0 +1,124 @@
+#!/usr/bin/python3
+#------------------------------------------------------------------------
+# GW-Server Delayed Event Data Check Program (ver.1.0)
+# this checks delayed new events exist in event table.
+# this is called by Zabbix and is executed as external script.
+#
+# Usage: check_delayed_events.py <delay>
+#  argument:
+#   delay :delay time (seconds)
+#  oupput:
+#   '0 <message>' :OK. all events are NOT delayed.
+#   '1 <message>' :NG. delayed events are found.
+#   '99 <message>' :other error occurred.
+#  exit code:
+#   always 0
+#
+# Author: K.Ohshiba
+#------------------------------------------------------------------------
+# Modified
+# 2017/07/30 1st version. K.Ohshiba
+
+# --- import libraries ---
+#import MySQLdb
+import mysql.connector
+import sys, time, syslog
+from datetime import datetime as DT
+from datetime import timedelta
+
+# --- import local modules ---
+import gwcommon
+
+# --- syslog setting ---
+scrname = sys.argv[0].split('/')[-1]
+syslog.openlog(scrname, logoption=syslog.LOG_PID, facility=syslog.LOG_LOCAL6)
+
+# --- define valiables ---
+
+# --- define functions ---
+# print usage
+def usage():
+    print('''usage: %s <delay>
+ delay : delayed time threshold (seconds)''' % (sys.argv[0].split('/')[-1]))
+
+# send result to zabbix and eyslog
+def sendSyslog(severity, message):
+    syslog.syslog('%s: %s' % (severity, message))
+
+# do DB operation
+def execDbOperation(conn, cursor, statement):
+    try:    
+        cursor.execute(statement)
+        dbres = cursor.fetchall()
+    except: 
+        syslog.syslog('[gwscript] CRITICAL: %s' % sys.exc_info()[0])
+        print("99 DB operation error.")
+        raise   
+    return dbres
+
+# search delayed events
+def searchDelayedEvents(conn, cursor, delaytime):
+    dtimestr = delaytime.strftime('%Y-%m-%d %H:%M:%S')
+    sqlval = (gwcommon.GW_EVENT_STATUS_NEW, dtimestr)
+    statement = "SELECT gw_event_id FROM gw_events WHERE event_status='%s' AND update_time < '%s'" % sqlval
+    dlyevts = execDbOperation(conn, cursor, statement)
+    return dlyevts
+
+# --- check args ---
+if len(sys.argv) < 2:
+    usage() 
+    exit()  
+
+# --- get arguments ---
+try:
+    delaythr = int(sys.argv[1])
+except ValueError:
+    print("99 could not convert argument to an integer.")
+    exit()
+
+# --- connect to db ---
+try:
+    global conn,cursor
+    conn = mysql.connector.connect(host=gwcommon.MY_HOST, user=gwcommon.MY_USER, passwd=gwcommon.MY_PASSWD, db=gwcommon.MY_DB, charset=gwcommon.MY_CHRSET)
+    cursor = conn.cursor()
+except: 
+    syslog.syslog('[gwscript] CRITICAL: %s' % sys.exc_info()[0])
+    print("99 DB connection error.")
+    raise   
+
+# --- make search threshold time ---
+tm = DT.now()
+delaytime = tm - timedelta(seconds=delaythr)
+
+# --- search delayed events ---
+delayevts = searchDelayedEvents(conn, cursor, delaytime)
+
+# ---- evaluate results ---
+evtnum = len(delayevts)
+if evtnum == 0:
+    # OK: no delayed events found.
+    sendSyslog(gwcommon.LOG_INFO, "no delayed events found.")
+    result = "0 no delayed events found."
+else:
+    # NG: delayed events found.
+    evtlist = []
+    for evt in delayevts:
+        evtlist.append(str(evt[0]))
+        evtstr = ','.join(evtlist)
+    sendSyslog(gwcommon.LOG_CRIT, "%d delayed events found. %s" % (evtnum, evtstr))
+    result = "1 %d delayed events found." % evtnum
+
+# --- return result to zabbix
+print(result)
+
+# --- end operation ---
+cursor.close()
+conn.close()
+
+syslog.closelog()
+
+exit()
+
+# EOF
+
+
